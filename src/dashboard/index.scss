@@ -1,0 +1,127 @@
+@use "~global/scss/bundle" as *;
+
+.presentation--list {
+    @include grid($columns: repeat(auto-fill, minmax(300px, 1fr)));
+    width: 100%;
+    gap: 30px;
+}
+.presentation {
+    @include flex(column, 5px, $justify: space-between);
+    @include radius("medium");
+    background: var(--white);
+    padding: 25px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+.presentation--icon {
+    @include radius("medium");
+    font-size: 24px;
+    background: var(--light);
+    color: var(--darkGray);
+    padding: 10px;
+    width: fit-content;
+    margin-bottom: 15px;
+}
+.presentation--title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.presentation--description {
+    font-size: 14px;
+    color: var(--darkGray);
+    margin-top: 10px;
+}
+.presentation--action {
+    @include radius("round");
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 25px;
+    background: var(--main);
+    width: fit-content;
+    border: none;
+    cursor: pointer;
+}
+.presentation--circle {
+    @include absolute($top: 18px, $right: 18px);
+    @include radius("round");
+    width: 12px;
+    height: 12px;
+    background: var(--main);
+}
+.presentation:hover { scale: 1.05; }
+
+
+
+.linkPreview--list {
+    @include grid($columns: repeat(auto-fill, minmax(500px, 1fr)));
+    gap: 35px;
+}
+.linkPreview {
+    @include flex(column, 25px, $justify: space-between);
+    @include radius("medium");
+    background: var(--white);
+    padding: 25px;
+    user-select: none;
+    position: relative;
+    max-width: 100%;
+    gap: 35px;
+}
+.linkPreview:hover { scale: 1.05; }
+.linkPreview--content, .linkPreview--url--list {
+    @include flex(column, 10px);
+    min-width: 0;
+    max-width: 100%;
+}
+.linkPreview--content { justify-content: space-between; }
+.linkPreview--icon {
+    @include radius("medium");
+    width: 48px;
+    height: 48px;
+}
+i.linkPreview--icon {
+    @include flex(row, $justify: center, $align: center);
+    background: var(--light);
+    color: var(--darkGray);
+    font-size: 28px;
+    padding: 10px;
+}
+img.linkPreview--icon { object-fit: cover; }
+.linkPreview--title {
+    @include line_clamp(1);
+    font-size: 22px;
+    font-weight: 600;
+}
+.linkPreview--description {
+    font-size: 12px;
+    color: var(--darkGray);
+}
+.linkPreview--url--list {
+    @include flex(column, 25px);
+}
+.linkPreview--url {
+    @include flex(column, 5px);
+    position: relative;
+    padding-left: 15px;
+    &::before {
+        @include absolute($top: 0, $left: 0px);
+        content: "";
+        width: 3px;
+        height: 100%;
+        background: var(--main);
+    }
+}
+.linkPreview--url--label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.linkPreview--url--value {
+    @include line_clamp(1);
+    @include radius("small");
+    font-size: 14px;
+    width: fit-content;
+    color: var(--darkGray);
+    u { text-decoration: underline 3px var(--info); }
+}

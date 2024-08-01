@@ -1,0 +1,177 @@
+@use "~global/scss/bundle" as *;
+
+.calendar {
+    @include flex(column, 25px);
+    width: 100%;
+    gap: 10px;
+}
+.calendar--options {
+    @include flex(row, 10px, $align: center);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+.calendar--option {
+    @include flex(row, 5px, $align: center);
+    @include radius("round");
+    border: none;
+    background: var(--white);
+    padding: 5px 15px;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+    i { font-size: 12px; }
+    &:has(input:checked) { background: var(--color) }
+    input { display: none; }
+}
+.calendar--content {
+    @include grid(repeat(7, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 650px;
+}
+.calendar--case {
+    @include radius("medium");
+    display: grid;
+    position: relative;
+    grid-template-rows: 1fr 3fr;
+    padding: 10px;
+    aspect-ratio: 1;
+    background: var(--white);
+    cursor: pointer;
+    border: none;
+    &.case__disabled { opacity: 0.25; cursor: not-allowed; }
+    &:not(.case__disabled):hover { scale: 1.05; }
+}
+.calendar--day {
+    @include flex(row, 5px, $align: center, $justify: center);
+    font-size: 12px;
+    z-index: 2;
+}
+.calendar--data {
+    @include radius("medium");
+    @include flex(column, $align: center, $justify: center);
+    line-height: 0.9;
+    z-index: 1;
+}
+.calendar--data--value {
+    font-size: 24px;
+    font-weight: 700;
+}
+.calendar--data--label {
+    font-size: 14px;
+    color: var(--darkGray);
+}
+.calendar--data::before {
+    @include absolute(0, 0, 0, 0);
+    @include radius("medium");
+    content: "";
+    background: var(--color);
+    opacity: var(--opacity);
+    z-index: -1;
+}
+
+
+
+.grid {
+    width: 100%;
+    max-width: 650px;
+}
+.grid--content {
+    @include flex(column, 1px);
+    background: var(--lightGray);
+    padding: 1px;
+    --radius: 5px;
+    border-radius: var(--radius);
+    > :first-child {
+        border-top-left-radius: var(--radius);
+        border-top-right-radius: var(--radius);
+    }
+    > :last-child {
+        border-bottom-left-radius: var(--radius);
+        border-bottom-right-radius: var(--radius);
+    }
+}
+.grid--header, .grid--row {
+    @include grid(2fr 1fr 1fr);
+}
+.grid--header {
+    padding: 16px;
+}
+.grid--column {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray);
+}
+.grid--row {
+    padding: 8px 16px;
+    border: none;
+    background: var(--white);
+    position: relative;
+    cursor: pointer;
+    > * {
+        @include flex(row, 10px, $align: center);
+    }
+    &::before {
+        @include absolute($bottom: 0, $left: 50%);
+        @include radius("round");
+        translate: -50% 50%;
+        content: "";
+        width: 0;
+        height: 3px;
+        background: var(--main);
+        transition-duration: .3s;
+    }
+    &:hover::before {
+        width: 80%;
+    }
+}
+.grid--title {
+    font-size: 14px;
+    font-weight: 600;
+    i {
+        @include flex(row, $align: center, $justify: center);
+        @include radius("small");
+        background: var(--lightGray);
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+}
+.grid--info {
+    color: var(--darkGray);
+    font-size: 12px;
+}
+.grid--action {
+    @include absolute($top: 50%, $right: 15px);
+    @include radius("small");
+    justify-content: center;
+    translate: 0 -50%;
+    width: 24px;
+    height: 24px;
+    background: var(--main);
+}
+.grid--footer {
+    @include flex(row, 25px, $align: center);
+    @include radius("medium");
+    padding: 16px;
+    border: 1px solid var(--lightGray);
+    background: var(--white);
+}
+.grid--footer--icon {
+    @include flex(row, $align: center, $justify: center);
+    @include radius("small");
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    background: var(--lightGray);
+}
+.grid--footer--title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.grid--footer--description {
+    font-size: 14px;
+    color: var(--darkGray);
+}

@@ -1,0 +1,59 @@
+@use "~global/scss/bundle" as *;
+
+.dual {
+    @include flex(row, 25px, $justify: space-between);
+    flex-wrap: wrap;
+    > * { flex: 1; }
+}
+.dual--item { @include flex(column, 50px) }
+.dual--title { @include flex(row, 15px, $align: center); }
+.dual--button {
+    @include flex(row, 10px, $align: center, $justify: center);
+    @include radius("medium");
+    @include shadow("normal");
+    background: var(--white);
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.link {
+    @include flex(column, 25px);
+    position: relative;
+    padding-left: 25px;
+}
+.link::before {
+    @include absolute($top: 0, $left: 0);
+    content: "";
+    width: 3px;
+    height: 100%;
+    background: var(--main);
+}
+.link--header {
+    @include flex(column, 5px);
+}
+.link--title {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.link--description {
+    font-size: 14px;
+    color: var(--darkGray);
+}
+.link--url {
+    @include flex(row, 10px, $align: center);
+    @include radius("small");
+    border: none;
+    background: var(--white);
+    padding: 10px 15px;
+    font-size: 16px;
+    width: fit-content;
+    cursor: pointer;
+    u { text-decoration: 2px underline var(--info); }
+    &.copied u { text-decoration: 2px underline var(--black); }
+}
+
+.qrcode {
+    @include radius("medium");
+}

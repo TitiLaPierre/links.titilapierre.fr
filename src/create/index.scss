@@ -1,0 +1,61 @@
+@use "~global/scss/bundle" as *;
+
+.form--step {
+    @include flex(column, 50px);
+}
+.form--field {
+    @include flex(column, 15px);
+    position: relative;
+    &::before {
+        @include absolute($top: 0, $left: -25px);
+        content: "";
+        width: 3px;
+        height: 100%;
+        background: var(--main);
+    }
+    &.field__error::before { background: var(--error); }
+}
+.form--tip {
+    @include absolute($top: -10px, $left: 0);
+    @include radius("small");
+    width: fit-content;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--white);
+    padding: 5px 10px;
+    color: var(--darkGray);
+    translate: 0 -100%;
+}
+.form--field--header { @include flex(column, 5px); }
+.form--field--line { @include flex(row, 20px, $align: center); }
+
+.form--field--title {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.form--field--error {
+    color: var(--error);
+    font-size: 14px;
+    font-weight: 500;
+}
+.form--field--description {
+    color: var(--darkGray);
+    font-size: 14px;
+}
+.form--field--output {
+    color: var(--darkGray);
+    font-size: 14px;
+    font-weight: 500;
+}
+.form--field--input {
+    @include radius("small");
+    @include shadow("normal");
+    background: var(--white);
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    max-width: 600px;
+    outline: solid 2px transparent;
+}
+.form--field--input:focus { outline-color: var(--main); }
+.field__error .form--field--input:focus { outline-color: var(--error); }

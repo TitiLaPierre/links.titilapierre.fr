@@ -1,0 +1,34 @@
+@use "~global/scss/bundle" as *;
+
+@mixin importFont($name, $variant, $weight, $style) {
+	$folder: kebabCase($name);
+	$formats: ("eot?#iefix", "embedded-opentype"), ("woff2", "woff2"), ("woff", "woff"), ("ttf", "truetype");
+	@font-face {
+		font-family: $name;
+		src: local("#{$name} #{$variant}"), local("#{$name}-#{$variant}");
+		@each $format in $formats {
+			$ext: nth($format, 1);
+			$format: nth($format, 2);
+			src: url("../assets/fonts/#{$folder}/#{$variant}.#{$ext}") format($format);
+		}
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+@mixin importFonts($name, $variants) {
+	@each $variant in $variants {
+		$variantName: nth($variant, 1);
+		$variantWeight: nth($variant, 2);
+		$variantStyle: nth($variant, 3);
+		@include importFont($name, $variantName, $variantWeight, $variantStyle);
+	}
+}
+
+@include importFonts("Proxima Soft", (
+	("Thin", 100, normal), ("Light", 300, normal), ("Regular", 400, normal), ("Medium", 500, normal),
+	("SemiBold", 600, normal), ("Bold", 700, normal), ("ExtraBold", 800, normal), ("Black", 900, normal),
+
+	("ThinIt", 100, italic), ("LightIt", 300, italic), ("RegularIt", 400, italic), ("MediumIt", 500, italic),
+	("SemiBoldIt", 600, italic), ("BoldIt", 700, italic), ("ExtraBoldIt", 800, italic), ("BlackIt", 900, italic)
+));

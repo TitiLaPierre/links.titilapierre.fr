@@ -1,0 +1,96 @@
+$shadowColor: #21212142;
+
+@mixin grid($columns: none, $rows: none) {
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+}
+
+@mixin radius($type) {
+    $radius: 0;
+    @if $type == "round" { $radius: 999px; }
+    @else if $type == "large" { $radius: 20px; }
+    @else if $type == 'medium' { $radius: 10px; }
+    @else if $type == 'small' { $radius: 5px; }
+    border-radius: $radius;
+}
+
+@mixin shadow($type) {
+    $shadow: none;
+    @if $type == "normal" { $shadow: 0 2px 4px 0 $shadowColor; }
+    @else if $type == "small" { $shadow: 0 2px 8px 0 $shadowColor; }
+    @else if $type == "large" { $shadow: 0 10px 24px 1px $shadowColor; }
+    box-shadow: $shadow;
+}
+
+@mixin flex($direction, $gap: 0, $justify: normal, $align: normal) {
+    display: flex;
+    flex-direction: $direction;
+    gap: $gap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin absolute($top: auto, $left: auto, $bottom: auto, $right: auto) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    bottom: $bottom;
+    right: $right;
+}
+
+@mixin line_clamp($lines) {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@function toLower($string) {
+    @return to-lower-case(quote(#{$string}));
+}
+
+@function replace($string, $substr, $newsubstr, $all: 0) {
+    $string: quote(#{$string});
+    $substr: quote(#{$substr});
+    $newsubstr: quote(#{$newsubstr});
+    $position-found: str-index($string, $substr);
+    $processed: ();
+  
+    @while ($position-found and $position-found > 0) {
+        $length-substr: str-length($substr);
+        @if (1 != $position-found) {
+            $processed: append($processed, str-slice($string, 0, $position-found - 1));
+        }
+        $processed: append($processed, $newsubstr);
+        $string: str-slice($string, $position-found + $length-substr);
+  
+        $position-found: 0;
+  
+        @if ($all > 0) {
+            $position-found: str-index($string, $substr);
+        }
+    }
+  
+    $processed: append($processed, $string);
+    $string: "";
+  
+    @each $s in $processed {
+        $string: #{$string}#{$s};
+    }
+  
+    @return $string;
+}
+  
+
+@function kebabCase($string, $prefix: "", $glue: "-", $suffix: "") {
+	$result: toLower($string);
+	$replace: " ", "-", "–", "—", "_", ",", ";", ":", ".", "+", "=", "?", "&", "*", "/", "|", ">", "<", "(", ")";
+  
+	@each $char in $replace {
+	  $result: replace($result, $char, $glue, 1);
+	}
+  
+	@return $prefix + $result + $suffix;
+}

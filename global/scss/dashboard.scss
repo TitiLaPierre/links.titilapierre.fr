@@ -1,0 +1,231 @@
+@use "~global/scss/bundle" as *;
+
+.navbar {
+    @include flex(column, 15px);
+    @include absolute($top: 0, $left: 0, $bottom: 0);
+    background-color: var(--white);
+    position: fixed;
+    padding: 20px 15px;
+    width: min(250px, 100%);
+}
+.navbar--groupContainer {
+    @include flex(column, 5px, $justify: space-between);
+    height: 100%;
+}
+.navbar--group { @include flex(column, 5px); }
+.navbar--separator {
+    border: none;
+    height: 2px;
+    background: var(--light);
+    width: 100%;
+    margin-block: 42px 10px;
+}
+.navbar--aligned {
+    @include flex(row, 15px, $align: center);
+}
+.navbar--logo {
+    width: 32px;
+    height: 32px;
+    user-select: none;
+    pointer-events: none;
+}
+.navbar--title {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.navbar--link {
+    @include flex(row, 15px, $align: center);
+    @include radius("small");
+    padding: 12px 20px;
+    font-weight: 600;
+    position: relative;
+    &:hover { background: var(--mainLight); }
+}
+.link__selected {
+    background: var(--light);
+    &::before {
+        @include absolute($top: 50%, $left: 0);
+        @include radius("round");
+        content: "";
+        translate: -50% -50%;
+        width: 4px;
+        height: 24px;
+        background: var(--darkGray);
+        transition-duration: .3s;
+    }
+    &:hover::before { background: var(--main); }
+}
+.navbar--profile {
+    @include flex(row, 15px, $align: center);
+    @include radius("small");
+    padding: 12px 20px;
+    font-weight: 600;
+    background: var(--light);
+    user-select: none;
+}
+.navbar--minimize {
+    @include absolute($top: 5px, $right: 0);
+    @include radius("round");
+    translate: -50% 0;
+    background: var(--lightGray);
+    border: none;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: top 0s;
+    z-index: 50;
+}
+.navbar--minimize:hover {
+    background: var(--black);
+    i { color: var(--white); }
+}
+.navbar--minimize.minimized { rotate: 180deg; }
+.navbar.minimized {
+    width: fit-content;
+    align-items: center;
+    .minimizable { display: none; justify-content: center; }
+    .navbar--link, .navbar--profile { padding: 12px; justify-content: center; }
+}
+
+body { overflow: hidden; }
+.page {
+    @include flex(column, 75px);
+    @include absolute($top: 0, $left: 250px, $right: 0, $bottom: 0);
+    padding: 50px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.minimized + .page { @include absolute($top: 0, $left: 74px, $right: 0, $bottom: 0); }
+.page--infos {
+    max-width: 500px;
+    width: 100%;
+}
+button.page--icon--wrapper {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 25px;
+    width: 64px;
+    height: 64px;
+    .page--icon--action {
+        @include absolute($top: 0, $left: 0, $right: 0, $bottom: 0);
+        @include flex(row, $align: center, $justify: center);
+        @include radius("medium");
+        background: var(--black);
+        opacity: 0;
+        z-index: 2;
+        font-size: 24px;
+        i { color: var(--white); }
+    }
+    &:disabled {
+        cursor: not-allowed;
+        opacity: .6;
+    }
+    &:not(:disabled):hover .page--icon--action { opacity: .75; }
+}
+.page--icon {
+    @include radius("medium");
+    width: 64px;
+    height: 64px;
+}
+span.page--icon {
+    @include flex(row, $justify: center, $align: center);
+    background: var(--darkGray);
+    color: var(--white);
+    font-size: 36px;
+    padding: 15px;
+}
+img.page--icon { object-fit: cover; }
+.page--title {
+    font-size: 36px;
+    font-weight: 700;
+    word-break: break-all;
+    line-height: 0.9;
+}
+.page--subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    position: relative;
+    &::before {
+        @include absolute($top: 0, $left: -15px);
+        @include radius("round");
+        width: 4px;
+        height: 100%;
+        background: var(--main);
+        content: "";
+    }
+}
+.page--description {
+    font-size: 14px;
+    color: var(--darkGray);
+    margin-top: 10px;
+}
+.page--section {
+    @include flex(column, 20px);
+}
+.page--actions {
+    @include flex(row, 20px, $align: stretch);
+    margin-bottom: 35px;
+}
+.page--action {
+    @include flex(row, 15px, $align: center);
+    @include radius("medium");
+    @include shadow("normal");
+    background: var(--white);
+    padding: 10px 20px;
+    flex-shrink: 0;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+    &.action__main { background: var(--black); color: var(--white); }
+    &.action__danger { background: var(--error); }
+    &:disabled { opacity: .6; cursor: not-allowed; }
+    > * { color: inherit; }
+}
+.page--action:has(.page--steps) { cursor: default; }
+.page--steps { @include flex(row, 10px, $align: center); }
+.page--step {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: none;
+    position: relative;
+    &[state=completed], &[state=current] {
+        background: var(--black);
+        cursor: pointer;
+    }
+    &[state=locked] {
+        background: var(--lightGray);
+        cursor: not-allowed;
+    }
+    &::before {
+        @include absolute(-4px, -4px, -4px, -4px);
+        content: "";
+        border-radius: 999px;
+    }
+}
+.page--search {
+    @include radius("small");
+    border: none;
+    padding-inline: 10px;
+    font-size: 16px;
+    outline: none;
+}
+.page--action:has(.page--search) {
+    position: relative;
+    cursor: text;
+    &::after {
+        @include absolute($top: 50%, $right: 10px);
+        @include radius("round");
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: var(--main);
+        opacity: 0;
+        translate: 0 -50%;
+    }
+    &:has(.page--search:not(:placeholder-shown))::after { opacity: 1 !important; }
+}

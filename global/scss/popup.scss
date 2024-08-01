@@ -1,0 +1,54 @@
+@use "~global/scss/bundle" as *;
+
+#popup {
+    @include radius("large");
+    @include flex(column);
+    @include shadow("large");
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background: white;
+    z-index: 1000;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    > * { padding: 15px 25px; }
+    .popup--close {
+        @include flex(row, $align: center, $justify: center);
+        @include radius("medium");
+        border: none;
+        background: var(--white);
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+    .popup--header {
+        @include flex(row, 10px, $align: center, $justify: space-between);
+        background: var(--light)
+    }
+    .popup--content {
+        @include flex(column, 25px);
+        padding-block: 25px;
+    }
+    .popup--paragraph {
+        font-size: 16px;
+        color: var(--darkGray);
+    }
+    .popup--actions {
+        @include flex(row, 10px, $align: center, $justify: flex-end);
+    }
+    .popup--button {
+        @include flex(row, 10px, $align: center);
+        @include radius("small");
+        padding: 10px 25px;
+        border: none;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        i { color: inherit; }
+        &.button__main { background: var(--black); color: var(--white); }
+        &.button__secondary { background: var(--light); }
+        &.button__danger { background: var(--error); }
+    }
+}

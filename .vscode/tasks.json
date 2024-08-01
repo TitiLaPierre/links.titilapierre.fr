@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		// {
+		// 	"label": "Run Sass Watch",
+		// 	"type": "shell",
+		// 	"command": "sass",
+		// 	"args": ["--watch", "scss:css"],
+		// 	"problemMatcher": [],
+		// 	"group": "build",
+		// 	"runOptions": {
+		// 		"runOn": "folderOpen",
+		// 	}
+		// }
+		{
+			"label": "Watch Files",
+			"type": "shell",
+			"command": "node",
+			"args": ["watch.js"],
+			"problemMatcher": [],
+			"group": "build",
+			"runOptions": {
+				"runOn": "folderOpen",
+			}
+		}
+	]
+}

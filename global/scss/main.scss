@@ -1,0 +1,51 @@
+/*
+
+	Root
+
+*/
+
+:root {
+	--mainDark: #F59C4E;
+	--main: #f5bd4e;
+	--mainLight: #fff7b8;
+
+	--error: #ff9595;
+	--success: #b7ff95;
+	--info: #717bff;
+
+	--black: #292929;
+	--darkGray: #5f5f5f;
+	--gray: #939393;
+	--lightGray: #cfcfcf;
+	--light: #F0F1F3;
+	--white: #fff;
+
+	--background: #f5f5f5;
+}
+
+/*
+
+	Reset
+
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Proxima Soft";
+	color: var(--black);
+	transition-duration: 0.3s;
+	text-decoration: none;
+}
+
+html, body { min-height: 100vh; }
+
+body { background: var(--background); }
+
+.pageBox--wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
