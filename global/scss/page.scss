@@ -126,19 +126,42 @@ img.page--icon { object-fit: cover; }
     padding-inline: 10px;
     font-size: 16px;
     outline: none;
+    &:disabled { cursor: inherit; }
 }
-.page--action:has(.page--search) {
-    position: relative;
-    cursor: text;
-    &::after {
-        @include absolute($top: 50%, $right: 10px);
-        @include radius("round");
-        content: "";
-        width: 8px;
-        height: 8px;
-        background: var(--main);
-        opacity: 0;
-        translate: 0 -50%;
-    }
-    &:has(.page--search:not(:placeholder-shown))::after { opacity: 1 !important; }
+
+.page--warning {
+    @include flex(row, 25px, $align: center);
+    @include radius("medium");
+    padding: 16px;
+    background: var(--white);
+}
+a.page--warning[href]:hover { scale: 1.05; }
+.page--warning--icon {
+    @include flex(row, $align: center, $justify: center);
+    @include radius("small");
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    background: var(--light);
+    color: var(--darkGray);
+}
+.page--warning--content { @include flex(column, 15px); }
+.page--warning--title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.page--warning--description {
+    font-size: 14px;
+    color: var(--darkGray);
+}
+.page--warning--action {
+    @include radius("round");
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 25px;
+    background: var(--main);
+    width: fit-content;
+    border: none;
 }
