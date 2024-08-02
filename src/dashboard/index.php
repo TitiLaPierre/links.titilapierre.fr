@@ -5,7 +5,7 @@ if (!is_logged()) {
 } else if (count(ARGUMENTS) == 0) {
     return combine_settings([
         "title" => "Tableau de bord",
-        "css" => ["css/dashboard.css", "css/dashboard/index.css"],
+        "css" => ["css/dashboard.css", "css/page.css", "css/dashboard/index.css"],
         "js" => ["js/dashboard.js"],
         "action" => "render_dashboard_home",
         "navbar" => "home"
@@ -13,7 +13,7 @@ if (!is_logged()) {
 } else if (count(ARGUMENTS) == 1 && ARGUMENTS[0] == "links") {
     return combine_settings([
         "title" => "Liens",
-        "css" => ["css/dashboard.css", "css/dashboard/index.css"],
+        "css" => ["css/dashboard.css", "css/page.css", "css/dashboard/index.css"],
         "js" => ["js/dashboard.js"],
         "action" => "render_dashboard_links",
         "navbar" => "links"
@@ -21,7 +21,7 @@ if (!is_logged()) {
 } else if (count(ARGUMENTS) == 1 && ARGUMENTS[0] == "campaigns") {
     return combine_settings([
         "title" => "Campagnes",
-        "css" => ["css/dashboard.css"],
+        "css" => ["css/dashboard.css", "css/page.css", "css/dashboard/index.css"],
         "js" => ["js/dashboard.js"],
         "action" => "render_dashboard_campaigns",
         "navbar" => "campaigns"

@@ -10,7 +10,7 @@ if (!is_logged()) {
         redirect("/dashboard/links/");
     return [
         "title" => "Lien — ".$link["name"],
-        "css" => ["css/dashboard.css", "css/popup.css", "css/link/index.css", "css/copy.css"],
+        "css" => ["css/dashboard.css", "css/page.css", "css/popup.css", "css/link/index.css", "css/copy.css"],
         "js" => ["js/dashboard.js", "js/link/index.js", "js/popup.js", "js/copy.js"],
         "link" => $link
     ];

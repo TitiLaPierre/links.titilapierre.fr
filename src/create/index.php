@@ -5,7 +5,11 @@ if (!is_logged()) {
     redirect("/dashboard/");
 }
 
-return [ "title" => "Nouveau lien", "css" => ["css/dashboard.css", "css/create/index.css"], "js" => ["js/dashboard.js", "js/create/index.js"] ];
+return [
+    "title" => "Nouveau lien",
+    "css" => ["css/dashboard.css", "css/page.css", "css/create/index.css"],
+    "js" => ["js/dashboard.js", "js/create/index.js"]
+];
 
 function render($settings) {
     

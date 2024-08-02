@@ -35,7 +35,7 @@ if (!is_logged()) {
     else if (empty($day)) {
         return combine_settings([
             "title" => "Statistiques — ".$link["name"],
-            "css" => ["css/dashboard.css", "css/stats/index.css"],
+            "css" => ["css/dashboard.css", "css/page.css", "css/stats/index.css"],
             "js" => ["js/dashboard.js"],
             "year" => $year,
             "month" => $month,
@@ -47,7 +47,7 @@ if (!is_logged()) {
     else {
         return combine_settings([
             "title" => "Statistiques — ".$link["name"],
-            "css" => ["css/dashboard.css", "css/stats/index.css"],
+            "css" => ["css/dashboard.css", "css/page.css", "css/stats/index.css"],
             "year" => $year,
             "month" => $month,
             "day" => $day,

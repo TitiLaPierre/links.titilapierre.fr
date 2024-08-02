@@ -1,5 +1,4 @@
 @use "~global/scss/bundle" as *;
-@import "~global/scss/page";
 
 .navbar {
     @include flex(column, 15px);
