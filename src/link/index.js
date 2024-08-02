@@ -36,7 +36,7 @@ updateIcon.addEventListener("click", async function() {
     if (response.success) {
         iconDefaultElement.style.display = "none"
         iconImageElement.style.display = null
-        iconImageElement.src = `media/${response.data.media_uid}`
+        iconImageElement.src = `media/${response.data.icon_uid}`
     } else {
         iconDefaultElement.style.display = null
         iconImageElement.style.display

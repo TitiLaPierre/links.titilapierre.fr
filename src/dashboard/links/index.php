@@ -29,10 +29,10 @@ function render_dashboard_links() {
                     foreach ($links as $link) { ?>
                         <a class="linkPreview" href="link/<?= $link["uid"] ?>/">
                             <div class="linkPreview--content">
-                                <?php if (empty($link["media_uid"])) { ?>
+                                <?php if (empty($link["icon_uid"])) { ?>
                                     <i class="linkPreview--icon fa-solid fa-earth-europe"></i>
                                 <?php } else { ?>
-                                    <img class="linkPreview--icon" src="media/<?= $link["media_uid"] ?>">
+                                    <img class="linkPreview--icon" src="media/<?= $link["icon_uid"] ?>">
                                 <?php } ?>
                                 <div>
                                     <h2 class="linkPreview--title"><?= $link["name"] ?></h2>

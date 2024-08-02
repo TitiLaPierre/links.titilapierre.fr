@@ -37,8 +37,8 @@ function render($settings) {
             </a>
         </div>
         <button class="page--icon--wrapper">
-            <span class="page--icon fas fa-earth-europe" <?php if (isset($link["media_uid"])) { ?>style="display: none;"<?php } ?>></span>
-            <img class="page--icon" alt="Icone du lien"  <?php if (empty($link["media_uid"])) { ?>style="display: none;"<?php } else { ?>src="media/<?= $link["media_uid"] ?>"<?php } ?>>
+            <span class="page--icon fas fa-earth-europe" <?php if (isset($link["icon_uid"])) { ?>style="display: none;"<?php } ?>></span>
+            <img class="page--icon" alt="Icone du lien"  <?php if (empty($link["icon_uid"])) { ?>style="display: none;"<?php } else { ?>src="media/<?= $link["icon_uid"] ?>"<?php } ?>>
             <span class="page--icon--action"><i class="fa-solid fa-rotate-right"></i></span>
         </button>
         <h1 class="page--title"><?= $link["name"] ?></h1>
