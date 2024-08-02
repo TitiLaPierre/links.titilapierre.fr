@@ -2,7 +2,7 @@ const link = JSON.parse(document.querySelector("[linkData]").getAttribute("linkD
 let { year, month, day } = JSON.parse(document.querySelector("[viewData]").getAttribute("viewData"))
 
 const contentGrid = document.querySelector(".grid--content")
-const footerGrid = document.querySelector(".grid--footer")
+const warningElement = document.querySelector("#grid--warning")
 
 async function updateViews(year, month, day) {
     const start = new Date(year, month-1, day, 0, 0, 0)
@@ -19,7 +19,7 @@ async function updateViews(year, month, day) {
         Object.values(viewsPerIps).forEach(views => views.sort())
 
         if (Object.keys(viewsPerIps).length > 0) {
-            footerGrid.style.display = "none"
+            warningElement.style.display = "none"
             contentGrid.style.display = null
             contentGrid.innerHTML = ""
             for (const [ip, views] of Object.entries(viewsPerIps)) {
@@ -37,7 +37,7 @@ async function updateViews(year, month, day) {
                 contentGrid.appendChild(rowElement)
             }
         } else {
-            footerGrid.style.display = null
+            warningElement.style.display = null
             contentGrid.style.display = "none"
         }
     }

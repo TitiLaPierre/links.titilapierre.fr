@@ -11,9 +11,9 @@ function render_dashboard_links() {
                     <i class="fas fa-plus"></i>
                     Créer un lien
                 </a>
-                <button class="page--action" onclick="this.querySelector('.page--search').focus()">
+                <button class="page--action" onclick="this.querySelector('.page--search').focus()" disabled>
                     <i class="fas fa-search"></i>
-                    <input class="page--search" type="text" placeholder="Rechercher">
+                    <input class="page--search" type="text" placeholder="Rechercher" disabled>
                 </button>
             </div>
             <h1 class="page--title">Vos Liens</h1>
@@ -26,7 +26,20 @@ function render_dashboard_links() {
             <div class="linkPreview--list">
                 <?php
                     $links = sql_query("SELECT * FROM links WHERE user_id = ? ORDER BY last_activity DESC", [$user["id"]], format: "array");
-                    foreach ($links as $link) { ?>
+                    if (count($links) === 0) { ?>
+                        <a class="page--warning" href="create/link/">
+                            <i class="page--warning--icon fa-solid fa-magnifying-glass"></i>
+                            <div class="page--warning--content">
+                                <div>
+                                    <h2 class="page--warning--title">Aucun lien créé</h2>
+                                    <p class="page--warning--description">
+                                        Vous n'avez pas créé de lien pour le moment, commencez dès maintenant !
+                                    </p>
+                                </div>
+                                <span class="page--warning--action">Créer un lien</span>
+                            </div>
+                        </a>
+                    <?php } foreach ($links as $link) { ?>
                         <a class="linkPreview" href="link/<?= $link["uid"] ?>/">
                             <div class="linkPreview--content">
                                 <?php if (empty($link["icon_uid"])) { ?>

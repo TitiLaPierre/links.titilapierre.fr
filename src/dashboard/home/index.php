@@ -20,13 +20,13 @@ function render_dashboard_home() { ?>
                     <span class="presentation--action">Commencer</span>
                     <span class="presentation--circle"></span>
                 </a>
-                <a class="presentation" href="create/campaign/">
+                <div class="presentation presentation__disabled">
                     <i class="presentation--icon fa-solid fa-layer-group"></i>
                     <h3 class="presentation--title">Lancer une campagne</h3>
                     <p class="presentation--description">Touchez plusieurs cibles, centralisez la récolte de statistiques.</p>
                     <span class="presentation--action">Commencer</span>
                     <span class="presentation--circle"></span>
-                </a>
+                </div>
             </div>
         </section>
         <section class="page--section">

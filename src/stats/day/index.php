@@ -32,14 +32,15 @@ function render_stats_day($link, $year, $month, $day) {
                 <span class="grid--column">Dernier accès</span>
             </div>
             <div class="grid--content" style="display: none;"></div>
-            <div class="grid--footer" style="display: none;">
-                <i class="grid--footer--icon fa-solid fa-magnifying-glass"></i>
+            <div class="page--warning" style="display: none;" id="grid--warning">
+                <i class="page--warning--icon fa-solid fa-magnifying-glass"></i>
                 <div>
-                    <h2 class="grid--footer--title">Aucune donnée</h2>
-                    <p class="grid--footer--description">
+                    <h2 class="page--warning--title">Aucune donnée</h2>
+                    <p class="page--warning--description">
                         Ce lien n'a pas été utilisé le <?= $day ?> <?= $months[$month-1] ?> <?= $year ?>.
                     </p>
                 </div>
+            </div>
         </div>
     </main>
 <?php } ?>

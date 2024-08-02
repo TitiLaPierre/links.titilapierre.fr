@@ -13,6 +13,8 @@
     border: none;
     cursor: pointer;
     position: relative;
+    &.presentation__disabled { opacity: .6; cursor: not-allowed; }
+    &:not(.presentation__disabled):hover { scale: 1.05; }
 }
 .presentation--icon {
     @include radius("medium");
@@ -50,7 +52,6 @@
     height: 12px;
     background: var(--main);
 }
-.presentation:hover { scale: 1.05; }
 
 
 
