@@ -1,5 +1,5 @@
-node_modules/
-js/
-css/
-package-lock.json
-medias/
+/node_modules/
+/js/
+/css/
+/package-lock.json
+/medias/
