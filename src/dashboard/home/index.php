@@ -33,16 +33,10 @@ function render_dashboard_home() {
         </section>
         <section class="page--section">
             <h2 class="page--subtitle">Activité récente</h2>
+            <div class="linkPreview--list">
             <?php
                 $links = sql_query("SELECT * FROM links WHERE user_id = ? AND UNIX_TIMESTAMP()-last_activity < 604800 ORDER BY last_activity DESC LIMIT 3", [$user["id"]], format: "array");
-                if (count($links) > 0) { ?>
-                    <div class="linkPreview--list">
-                        <?php foreach ($links as $link) layout_link_preview($link) ?>
-                    </div>
-                    <div class="page--actions">
-                        <a class="page--action" href="dashboard/links/"><i class="fa-solid fa-arrow-right"></i>Tout voir</a>
-                    </div>
-                <?php } else { ?>
+                if (count($links) > 0) { foreach ($links as $link) layout_link_preview($link); } else { ?>
                     <div class="page--warning">
                         <i class="page--warning--icon fa-solid fa-envelope-open"></i>
                         <div class="page--warning--content">
@@ -52,10 +46,13 @@ function render_dashboard_home() {
                                     Il n'y a rien à afficher comme information récente de cette semaine.
                                 </p>
                             </div>
-                            <span class="page--warning--action">Tout voir</span>
                         </div>
                     </div>
                 <?php } ?>
+            </div>
+            <div class="page--actions">
+                <a class="page--action" href="dashboard/links/"><i class="fa-solid fa-arrow-right"></i>Voir plus</a>
+            </div>
         </section>
     </main>
 <?php } ?>
