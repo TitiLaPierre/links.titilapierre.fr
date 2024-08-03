@@ -25,17 +25,20 @@ define("ARGUMENTS", $arguments);
 
 sql_connect();
 
-if (file_exists("src/".$page."/index.php")) {
-    require_once("layouts/header_footer.php");
-    $settings = [ "title" => "Links", "css" => [], "js" => [] ];
-    $pageSettings = require_once("src/".$page."/index.php");
-    if (is_array($pageSettings)) {
-        $settings = combine_settings($settings, $pageSettings);
-        layout_header($settings["title"], $settings["css"]);
-        render($settings);
-        layout_footer($settings["js"]);
-    }
-} else require_once("redirection.php");
+if (file_exists("src/".$page."/index.php"))
+    $file = "src/".$page."/index.php";
+else
+    $file = "src/redirection.php";
+
+require_once("layouts/header_footer.php");
+$settings = [ "title" => "Links", "css" => [], "js" => [] ];
+$pageSettings = require_once($file);
+if (is_array($pageSettings)) {
+    $settings = combine_settings($settings, $pageSettings);
+    layout_header($settings["title"], $settings["css"]);
+    render($settings);
+    layout_footer($settings["js"]);
+}
 
 sql_disconnect();
 

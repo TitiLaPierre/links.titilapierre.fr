@@ -1,0 +1,49 @@
+@use "~global/scss/bundle" as *;
+
+body {
+    @include flex(column, $align: center, $justify: center);
+    position: relative;
+}
+.error {
+    @include flex(column, 15px, $align: center);
+    @include radius("large");
+    background: var(--white);
+    padding: 50px;
+    width: min(100%, 600px);
+}
+.error--icon {
+    @include flex(row, $align: center, $justify: center);
+    @include radius("medium");
+    font-size: 40px;
+    background: var(--main);
+    width: 64px;
+    height: 64px;
+}
+.error--title {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-top: 35px;
+}
+.error--description {
+    color: var(--darkGray);
+    font-size: 16px;
+}
+.error--button {
+    @include flex(row, 15px, $align: center, $justify: center);
+    @include radius("small");
+    background: var(--main);
+    margin-top: 35px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    user-select: none;
+}
+.error--login {
+    @include absolute($bottom: 20px, $left: 50%);
+    translate: -50% 0;
+    color: var(--gray);
+    font-size: 12px;
+    font-weight: 500;
+    user-select: none;
+}
