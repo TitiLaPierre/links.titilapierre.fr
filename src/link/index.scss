@@ -56,4 +56,5 @@
 
 .qrcode {
     @include radius("medium");
+    user-select: none;
 }

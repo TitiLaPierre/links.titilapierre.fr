@@ -13,6 +13,7 @@
     border: none;
     cursor: pointer;
     position: relative;
+    user-select: none;
     &.presentation__disabled { opacity: .6; cursor: not-allowed; }
     &:not(.presentation__disabled):hover { scale: 1.05; }
 }
@@ -43,7 +44,6 @@
     background: var(--main);
     width: fit-content;
     border: none;
-    cursor: pointer;
 }
 .presentation--circle {
     @include absolute($top: 18px, $right: 18px);
@@ -52,8 +52,6 @@
     height: 12px;
     background: var(--main);
 }
-
-
 
 .linkPreview--list {
     @include grid($columns: repeat(auto-fill, minmax(500px, 1fr)));

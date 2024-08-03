@@ -39,6 +39,7 @@
     background: var(--white);
     cursor: pointer;
     border: none;
+    user-select: none;
     &.case__disabled { opacity: 0.25; cursor: not-allowed; }
     &:not(.case__disabled):hover { scale: 1.05; }
 }

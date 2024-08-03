@@ -134,6 +134,7 @@ img.page--icon { object-fit: cover; }
     @include radius("medium");
     padding: 16px;
     background: var(--white);
+    user-select: none;
 }
 a.page--warning[href]:hover { scale: 1.05; }
 .page--warning--icon {
