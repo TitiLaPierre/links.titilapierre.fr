@@ -64,7 +64,7 @@ function validate(step) {
         if (targetInput.value.trim() == "") {
             displayError(targetField, null)
             validation = false
-        } else if (!isURL(targetInput.value.trim())) {
+        } else if (!/^(?:(http(?:s)?):\/\/.)?[-a-z0-9@%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-z0-9@:%_\+.~#?&\/\/=]*)$/i.test(targetInput.value.trim()) && targetInput.value.trim().length < 2083) {
             displayError(targetField, "L'entée n'est pas une URL.")
             validation = false
         } else {
@@ -115,6 +115,7 @@ nextButton.addEventListener("click", async function() {
         const response = await api_call(url("/api/link/"), { method: "POST",
             body: { name: nameInput.value.trim(), redirect_url: targetInput.value.trim(), source_url: sourceInput.value.trim() },
         })
+        console.log(response)
         waitingResponse = false
         if (!response.success) {
             if (response.code == "LINK_ALREADY_EXISTS") {
@@ -161,9 +162,4 @@ window.addEventListener("pageshow", () => showStep(currentStep))
 
 for (const element of document.querySelectorAll(".page--step")) {
     element.addEventListener("click", () => element.getAttribute("state") === "completed" && showStep(parseInt(element.getAttribute("step"))))
-}
-
-function isURL(str) {
-    var regex = /^(?:http(?:s)?:\/\/.)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$/i;
-    return str.length < 2083 && regex.test(str);
 }

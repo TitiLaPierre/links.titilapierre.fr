@@ -4,14 +4,17 @@ function endpoint_create_link($params, $data) {
     if (!is_logged()) return [ "success" => false, "code" => "CONNECTION_REQUIRED" ];
     if (empty($data["name"]) || empty($data["redirect_url"])) return [ "success" => false, "code" => "INVALID_FIELDS" ];
     
-    $name = htmlspecialchars($data["name"]); 
-    $name = preg_replace("/\s+/", " ", $name);
+    $name = preg_replace("/\s+/", " ", htmlspecialchars($data["name"]));
     $source_url = empty($data["source_url"]) ? generate_random_string(8) : htmlspecialchars($data["source_url"]);
     $redirect_url = htmlspecialchars($data["redirect_url"]);
+
+    $redirect_regex = "/^(?:(http(?:s)?):\/\/.)?[-a-z0-9@%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-z0-9@:%_\+.~#?&\/\/=]*)$/i";
+    $redirect_match = preg_match($redirect_regex, $redirect_url, $matches);
+    if (count($matches) == 1) $redirect_url = "https://".$redirect_url;
     
     if (!preg_match("/^[\p{L}\p{N} ]{1,64}$/u", $name)) return [ "success" => false, "code" => "INVALID_NAME" ];
     if (!preg_match("/^[a-zA-Z0-9\.\-_]{3,64}$/", $source_url)) return [ "success" => false, "code" => "INVALID_SOURCE" ];
-    if (!preg_match("/^(?:http(?:s)?:\/\/.)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$/i", $redirect_url)) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
+    if (!$redirect_match) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
     if (strlen($redirect_url) >= 2083) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
     if (sql_query("SELECT * FROM links WHERE source_url = ?", [$source_url], format: "first")) return [ "success" => false, "code" => "LINK_ALREADY_EXISTS" ];
 
@@ -34,23 +37,25 @@ function endpoint_update_link($params, $data) {
 
     $link = sql_query("SELECT * FROM links WHERE uid = ?", [$params["uid"]], format: "first");
     $user = get_user();
+    
     if (!$link) return [ "success" => false, "code" => "LINK_NOT_FOUND" ];
     if ($link["user_id"] != $user["id"]) return [ "success" => false, "code" => "LINK_NOT_FOUND" ];
 
-    if (!empty($data["name"])) {
-        $link["name"] = htmlspecialchars($data["name"]);
-        $link["name"] = preg_replace("/\s+/", " ", $link["name"]);
-    }
-    if (!empty($data["source_url"])) $link["source_url"] = htmlspecialchars($data["source_url"]);
-    if (!empty($data["redirect_url"])) $link["redirect_url"] = htmlspecialchars($data["redirect_url"]);
-    
-    if (!preg_match("/^[\p{L}\p{N} ]{1,64}$/u", $link["name"])) return [ "success" => false, "code" => "INVALID_NAME" ];
-    if (!preg_match("/^[a-zA-Z0-9\.\-_]{3,64}$/", $link["source_url"])) return [ "success" => false, "code" => "INVALID_SOURCE" ];
-    if (!preg_match("/^(?:http(?:s)?:\/\/.)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$/i", $link["redirect_url"])) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
-    if (strlen($link["redirect_url"]) >= 2083) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
-    if (sql_query("SELECT * FROM links WHERE source_url = ? AND uid != ?", [$link["source_url"], $link["uid"]], format: "first")) return [ "success" => false, "code" => "LINK_ALREADY_EXISTS" ];
+    $name = preg_replace("/\s+/", " ", htmlspecialchars($data["name"])) ?? $link["name"];
+    $source_url = htmlspecialchars($data["source_url"]) ?? $link["source_url"];
+    $redirect_url = htmlspecialchars($data["redirect_url"]) ?? $link["redirect_url"];
 
-    sql_query("UPDATE links SET name = ?, source_url = ?, redirect_url = ? WHERE uid = ?", [$link["name"], $link["source_url"], $link["redirect_url"], $link["uid"]], format: null);
+    $redirect_regex = "/^(?:(http(?:s)?):\/\/.)?[-a-z0-9@%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-z0-9@:%_\+.~#?&\/\/=]*)$/i";
+    $redirect_match = preg_match($redirect_regex, $redirect_url, $matches);
+    if (count($matches) == 1) $redirect_url = "https://".$redirect_url;
+    
+    if (!preg_match("/^[\p{L}\p{N} ]{1,64}$/u", $name)) return [ "success" => false, "code" => "INVALID_NAME" ];
+    if (!preg_match("/^[a-zA-Z0-9\.\-_]{3,64}$/", $source_url)) return [ "success" => false, "code" => "INVALID_SOURCE" ];
+    if (!preg_match("/^(?:http(?:s)?:\/\/.)?(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{1,6}\b(?:[-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$/i", $redirect_url)) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
+    if (strlen($redirect_url) >= 2083) return [ "success" => false, "code" => "INVALID_REDIRECT" ];
+    if (sql_query("SELECT * FROM links WHERE source_url = ? AND uid != ?", [$source_url, $link["uid"]], format: "first")) return [ "success" => false, "code" => "LINK_ALREADY_EXISTS" ];
+
+    sql_query("UPDATE links SET name = ?, source_url = ?, redirect_url = ? WHERE uid = ?", [$name, $source_url, $redirect_url, $link["uid"]], format: null);
 
     return [ "success" => true, "code" => "LINK_EDITED" ];
 }
