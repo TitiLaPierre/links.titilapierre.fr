@@ -53,7 +53,7 @@ function render($settings) {
                 <div class="link--header">
                     <h3 class="link--title">Source</h3>
                     <p class="link--description">
-                        Le traffic est redirigé à partir de cet URL.
+                        Le trafic est redirigé à partir de cette URL.
                     </p>
                 </div>
                 <button class="link--url" copy="<?= WEBSITE_URL.$link["source_url"]."/" ?>">
@@ -65,7 +65,7 @@ function render($settings) {
                 <div class="link--header">
                     <h3 class="link--title">Destination</h3>
                     <p class="link--description">
-                        Le traffic est redirigé vers cet URL.
+                        Le trafic est redirigé vers cette URL.
                     </p>
                 </div>
                 <button class="link--url" copy="<?= $link["redirect_url"] ?>">
