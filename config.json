@@ -1,7 +1,7 @@
 {
     "version": {
 		"type": "beta",
-		"id": "v1.1.0"
+		"id": "v1.1.1"
 	},
 	"links": {
 		"stable": "https://links.titilapierre.fr/",
@@ -11,13 +11,13 @@
 		"beta": {
 			"hostname": "localhost",
 			"username": "links",
-			"password": "XMi0Umo-]Vu-8mZg",
+			"password": "{{SECRET_PASSWORD_BETA}}",
 			"database": "links_database"
 		},
 		"stable": {
 			"hostname": "localhost",
 			"username": "links",
-			"password": "XMi0Umo-]Vu-8mZg",
+			"password": "{{SECRET_PASSWORD_STABLE}}",
 			"database": "links_database"
 		}
 	}

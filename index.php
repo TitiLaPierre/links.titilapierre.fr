@@ -3,7 +3,12 @@
 require_once("internal.php");
 
 try {
-    $main = json_decode(file_get_contents("config.json"), true);
+    $secret = json_decode(file_get_contents("secret.json"), true);
+    $main_content = file_get_contents("config.json");
+    preg_replace_callback("/{{(.+)}}/", function($matches) use (&$main_content, $secret) {
+        $main_content = str_replace("{{".$matches[1]."}}", $secret[$matches[1]], $main_content);
+    }, $main_content);
+    $main = json_decode($main_content, true);
 } catch (Exception $ignore) {
     http_response_code(500);
     exit();

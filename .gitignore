@@ -3,3 +3,5 @@
 /css/
 /package-lock.json
 /medias/
+secret.json
+.vscode/settings.json
