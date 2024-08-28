@@ -35,7 +35,7 @@ function render() { ?>
                     <span class="login--note">Vous resterez connecté pendant <b>1 semaine</b>.</span>
                 </div>
             </div>
-            <span class="login--banner" style="background-image: url(<?= WEBSITE_URL ?>assets/login.svg">
+            <span class="login--banner" style="background-image: url(<?= VERSION["base_url"] ?>assets/login.svg">
         </main>
     </div>
 <?php }

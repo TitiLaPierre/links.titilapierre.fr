@@ -25,7 +25,7 @@ function endpoint_create_link($params, $data) {
     sql_query("INSERT INTO links (name, uid, source_url, redirect_url, user_id, creation_date, last_activity) VALUES (?, ?, ?, ?, ?, ?, ?)", [$name, $uid, $source_url, $redirect_url, $user["id"], $creation_date, $creation_date], format: null);
 
     $icon_uid = create_media("icons", "https://www.google.com/s2/favicons?sz=64&domain=".$redirect_url, get_user());
-    $qrcode_uid = create_media("qrcodes", "https://api.qrserver.com/v1/create-qr-code/?size=150x150&qzone=4&data=".WEBSITE_URL.$source_url, get_user());
+    $qrcode_uid = create_media("qrcodes", "https://api.qrserver.com/v1/create-qr-code/?size=150x150&qzone=4&data=".VERSION["base_url"].$source_url, get_user());
 
     sql_query("UPDATE links SET icon_uid = ?, qrcode_uid = ? WHERE uid = ?", [$icon_uid, $qrcode_uid, $uid], format: null);
 

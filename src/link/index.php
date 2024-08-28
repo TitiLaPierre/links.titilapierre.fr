@@ -56,8 +56,8 @@ function render($settings) {
                         Le trafic est redirigé à partir de cette URL.
                     </p>
                 </div>
-                <button class="link--url" copy="<?= WEBSITE_URL.$link["source_url"]."/" ?>">
-                    <span><?= WEBSITE_URL?><u><?= $link["source_url"]?></u>/</span>
+                <button class="link--url" copy="<?= VERSION["base_url"].$link["source_url"]."/" ?>">
+                    <span><?= VERSION["base_url"]?><u><?= $link["source_url"]?></u>/</span>
                     <i class="fas fa-copy" copied="fas fa-check"></i>
                 </button>
             </div>

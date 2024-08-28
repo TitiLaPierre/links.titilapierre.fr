@@ -30,7 +30,7 @@ function redirect($location) {
 
 function sql_connect() {
     $GLOBALS["DATABASE"] = mysqli_init();
-    $GLOBALS["DATABASE"]->real_connect(DATABASE_INFOS["hostname"], DATABASE_INFOS["username"], DATABASE_INFOS["password"], DATABASE_INFOS["database"]);
+    $GLOBALS["DATABASE"]->real_connect(VERSION["database"]["hostname"], VERSION["database"]["username"], VERSION["database"]["password"], VERSION["database"]["database"]);
     $GLOBALS["DATABASE"]->set_charset("utf8");
 }
 

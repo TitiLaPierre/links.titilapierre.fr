@@ -1,24 +1,25 @@
 {
     "version": {
-		"type": "beta",
-		"id": "v1.1.1"
-	},
-	"links": {
-		"stable": "https://links.titilapierre.fr/",
-		"beta": "http://links/"
-	},
-	"database": {
-		"beta": {
-			"hostname": "localhost",
-			"username": "links",
-			"password": "{{SECRET_PASSWORD_BETA}}",
-			"database": "links_database"
-		},
+		"environment": "beta",
+		"id": "v1.1.2"
+	}, "environments": {
 		"stable": {
-			"hostname": "localhost",
-			"username": "links",
-			"password": "{{SECRET_PASSWORD_STABLE}}",
-			"database": "links_database"
+			"base_url": "https://links.titilapierre.fr/",
+			"database": {
+				"hostname": "localhost",
+				"username": "links",
+				"password": "{{SECRET_PASSWORD_STABLE}}",
+				"database": "links_database"
+			}
+		},
+		"beta": {
+			"base_url": "http://links/",
+			"database": {
+				"hostname": "localhost",
+				"username": "links",
+				"password": "{{SECRET_PASSWORD_BETA}}",
+				"database": "links_database"
+			}
 		}
 	}
 }

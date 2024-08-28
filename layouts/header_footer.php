@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<base href="<?= WEBSITE_URL ?>">
+	<base href="<?= VERSION["base_url"] ?>">
     <title><?= $title ?></title>
     <meta charset="utf-8">
     <script type="text/javascript">
-        const url = (a) => new URL(a, "<?= WEBSITE_URL ?>").toString()
+        const url = (a) => new URL(a, "<?= VERSION["base_url"] ?>").toString()
         async function api_call(url, { method="GET", headers, body }) {
             headers = { "Content-Type": "application/json", ...(headers ?? {}) }
             const response = await fetch(url, {

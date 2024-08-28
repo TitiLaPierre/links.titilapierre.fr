@@ -25,7 +25,7 @@
         <div class="linkPreview--url--list">
             <div class="linkPreview--url">
                 <h6 class="linkPreview--url--label">Source</h6>
-                <span class="linkPreview--url--value"><?= WEBSITE_URL ?><u><?= $link["source_url"] ?></u>/</span>
+                <span class="linkPreview--url--value"><?= VERSION["base_url"] ?><u><?= $link["source_url"] ?></u>/</span>
             </div>
             <div class="linkPreview--url">
                 <h6 class="linkPreview--url--label">Destination</h6>

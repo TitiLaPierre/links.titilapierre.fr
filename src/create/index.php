@@ -72,7 +72,7 @@ function render($settings) {
                             <span class="form--field--error" style="display: none;"></span>
                         </div>
                         <p class="form--field--description">La fin du lien depuis lequel les utilisateurs arriveront.</p>
-                        <span class="form--field--output" syncPattern="<?= WEBSITE_URL ?>%input%" syncInput="form--source--input"><?= WEBSITE_URL ?></span>
+                        <span class="form--field--output" syncPattern="<?= VERSION["base_url"] ?>%input%" syncInput="form--source--input"><?= VERSION["base_url"] ?></span>
                     </div>
                     <input class="form--field--input" type="url" maxlength="64" field="source" placeholder="URL source" id="form--source--input">
                 </div>

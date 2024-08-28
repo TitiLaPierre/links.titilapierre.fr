@@ -14,10 +14,10 @@ try {
     exit();
 }
 
-define("VERSION_TYPE", $main["version"]["type"]);
-define("VERSION_ID", $main["version"]["id"]);
-define("WEBSITE_URL", $main["links"][VERSION_TYPE]);
-define("DATABASE_INFOS", $main["database"][VERSION_TYPE]);
+define("VERSION", array_merge($main["environments"][$main["version"]["environment"]], [
+    "environment" => $main["version"]["environment"],
+    "id" => $main["version"]["id"]
+]));
 
 $path = !empty($_GET["to"]) ? $_GET["to"] : null;
 while (str_ends_with($path, "/")) $path = substr($path, 0, -1);
