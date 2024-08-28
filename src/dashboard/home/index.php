@@ -18,14 +18,14 @@ function render_dashboard_home() {
                 <a class="presentation" href="create/link/">
                     <i class="presentation--icon fa-solid fa-link"></i>
                     <h3 class="presentation--title">Créer un lien</h3>
-                    <p class="presentation--description">Redirigez les utilistateurs et récolter des données analytiques sur ceux-ci.</p>
+                    <p class="presentation--description">Redirigez les utilistateurs et récoltez des données analytiques sur ceux-ci.</p>
                     <span class="presentation--action">Commencer</span>
                     <span class="presentation--circle"></span>
                 </a>
                 <div class="presentation presentation__disabled">
                     <i class="presentation--icon fa-solid fa-layer-group"></i>
                     <h3 class="presentation--title">Lancer une campagne</h3>
-                    <p class="presentation--description">Touchez plusieurs cibles, centralisez la récolte de statistiques.</p>
+                    <p class="presentation--description">Touchez plusieurs cibles et centralisez la récolte de statistiques.</p>
                     <span class="presentation--action">Commencer</span>
                     <span class="presentation--circle"></span>
                 </div>
