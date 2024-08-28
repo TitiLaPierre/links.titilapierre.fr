@@ -2,16 +2,17 @@ const link = JSON.parse(document.querySelector("[linkData]").getAttribute("linkD
 let { year, month } = JSON.parse(document.querySelector("[viewData]").getAttribute("viewData"))
 const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
-let currentOption
+let currentMode
 
 const calendarElement = document.querySelector(".calendar")
 const calendarContentElement = document.querySelector(".calendar--content")
-const calendarDateElement = document.querySelector(".calendar--date")
-const calendarDateIcon = document.querySelector("#calendar--date--icon")
 
-const previousButton = document.querySelector(".calendar--back")
-const warpButton = document.querySelector(".calendar--warp")
-const nextButton = document.querySelector(".calendar--next")
+const monthElement = document.querySelector("#calendar--month")
+const yearElement = document.querySelector("#calendar--year")
+
+const previousButton = document.querySelector("#calendar--back")
+const nextButton = document.querySelector("#calendar--next")
+const nowButton = document.querySelector("#calendar--now")
 
 class Case {
     constructor() {
@@ -94,18 +95,19 @@ class DayCase extends Case {
     }
 }
 
-function updateOptions(newOption) {
-    if (currentOption) {
-        for (const element of document.querySelectorAll(`[filter=${currentOption}]`))
+function updateModes(newMode) {
+    if (currentMode) {
+        for (const element of document.querySelectorAll(`[filter=${currentMode}]`))
             element.style.display = "none"
     }
-    currentOption = newOption
-    for (const element of document.querySelectorAll(`[filter=${currentOption}]`))
+    currentMode = newMode
+    for (const element of document.querySelectorAll(`[filter=${currentMode}]`))
         element.style.display = null
 }
 
 async function updateCalendar(newYear, newMonth) {
-    currentOption = document.querySelector("[name=calendar--option]:checked").value
+    if (newYear == 0 && newMonth < 1) return
+    currentMode = document.querySelector("[name=calendar--mode]:checked").value
 
     if (newMonth < 1) newYear--, newMonth += 12
     while (newMonth > 12) newYear++, newMonth -= 12
@@ -113,9 +115,11 @@ async function updateCalendar(newYear, newMonth) {
     year = newYear
     month = newMonth
 
-    calendarDateIcon.setAttribute("class", "fas fa-spinner fa-spin")
     nextButton.disabled = true
     previousButton.disabled = true
+
+    if (year == new Date().getFullYear() && month == new Date().getMonth()+1) nowButton.style.display = "none"
+    else nowButton.style.display = null
 
     const start = new Date(newYear, newMonth-1, 1)
     const end = new Date(newYear, newMonth, 1, 0, 0, -1)
@@ -150,44 +154,62 @@ async function updateCalendar(newYear, newMonth) {
         }
         while (calendarContentElement.childElementCount % 7 != 0)
             calendarContentElement.appendChild(new DisabledCase().build())
-        calendarDateElement.style.display = null
-        calendarDateElement.innerHTML = `${months[newMonth-1]} ${newYear.toString().padStart(4, "0")}`
+        monthElement.value = months[newMonth-1]
+        yearElement.value = newYear.toString().padStart(4, "0")
+        resizeElement(monthElement)
+        resizeElement(yearElement)
     }
 
-    calendarDateIcon.setAttribute("class", "fas fa-calendar-days")
     nextButton.disabled = null
     previousButton.disabled = null
 
-    updateOptions(currentOption)
+    updateModes(currentMode)
 }
 
 nextButton.addEventListener("click", () => updateCalendar(year, month+1))
 previousButton.addEventListener("click", () => updateCalendar(year, month-1))
+nowButton.addEventListener("click", () => updateCalendar(new Date().getFullYear(), new Date().getMonth()+1))
 
-warpButton.addEventListener("click", (e) => {
-    e.stopPropagation()
-    openPopup({
-        title: "Se déplacer dans le temps",
-        paragraphs: [ "Indiquez une année et un mois pour accéder aux statistiques de ce mois." ],
-        actions: [
-            {
-                text: "Annuler",
-                appearance: "secondary",
-                icon: "fas fa-times",
-                execute: "closePopup()"
-            },
-            {
-                text: "Aujourd'hui",
-                appearance: "main",
-                icon: "fas fa-calendar-day",
-                execute: "updateCalendar(new Date().getFullYear(), new Date().getMonth()+1); closePopup()"
-            }
-        ]
-    })
+for (const mode of document.querySelectorAll("[name=calendar--mode]")) {
+    mode.addEventListener("change", () => updateModes(mode.value))
+}
+
+monthElement.addEventListener("input", function() {
+    this.value = this.value.replace(/[^\p{L}\p{N}]/gu, "").slice(0, 10)
+    resizeElement(this)
+})
+yearElement.addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "").slice(0, 4)
+    resizeElement(this)
 })
 
-for (const option of document.querySelectorAll("[name=calendar--option]")) {
-    option.addEventListener("change", () => updateOptions(option.value))
-}
+monthElement.addEventListener("blur", function() {
+    if (this.value == "") {
+        this.value = months[month-1]
+        resizeElement(this)
+    } else {
+        // Search for the month in the list (case and accent insensitive)
+        const newMonth = months.findIndex(month => month.toLowerCase().startsWith(this.value.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '')))
+        if (newMonth != -1) updateCalendar(year, newMonth+1)
+        else {
+            this.value = months[month-1]
+            resizeElement(this)
+        }
+    }
+})
+yearElement.addEventListener("blur", function() {
+    if (this.value == "") {
+        this.value = year
+        resizeElement(this)
+    } else updateCalendar(parseInt(this.value), month)
+})
+
+
+window.addEventListener("keydown", function(e) {
+    if (e.key == "Enter") {
+        if (monthElement === document.activeElement) yearElement.focus()
+        else if (yearElement === document.activeElement) yearElement.blur()
+    }
+})
 
 window.addEventListener("pageshow", () => updateCalendar(year, month))

@@ -24,6 +24,17 @@
             var parts = value.split("; " + name + "=")
             if (parts.length == 2) return parts.pop().split(";").shift()
         }
+        function resizeElement(element) {
+            const text = element.value
+            const [fontFamily, fontSize] = [window.getComputedStyle(element).fontFamily, window.getComputedStyle(element).fontSize]
+
+            const canvas = document.createElement("canvas")
+            const context = canvas.getContext("2d")
+            context.font = `${fontSize} ${fontFamily}`
+
+            const width = context.measureText(text).width
+            element.style.width = `${width}px`
+        }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="assets/favicon.png">
