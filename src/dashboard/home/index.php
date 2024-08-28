@@ -51,7 +51,7 @@ function render_dashboard_home() {
                 <?php } ?>
             </div>
             <div class="page--actions">
-                <a class="page--action" href="dashboard/links/"><i class="fa-solid fa-arrow-right"></i>Voir plus</a>
+                <a class="page--action" href="dashboard/links/"><i class="fa-solid fa-arrow-right"></i>Afficher tous les liens</a>
             </div>
         </section>
     </main>
