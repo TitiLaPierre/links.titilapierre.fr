@@ -18,7 +18,7 @@ deleteButton.addEventListener("click", async function(e) {
         title: "Supprimer le lien",
         paragraphs: [
             `En continuant, vous allez supprimer le lien "${link.name}" comprenant les statistiques et la liaison de redirection entre les deux sites.`,
-            "Cette opération est irréversible et ne pourra pas être annulée.",
+            "Cette opération est irréversible.",
         ],
         actions: [
             { text: "Annuler", icon: "fas fa-arrow-left", appearance: "secondary", execute: "closePopup()" },
