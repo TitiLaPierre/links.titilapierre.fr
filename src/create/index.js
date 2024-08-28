@@ -65,7 +65,7 @@ function validate(step) {
             displayError(targetField, null)
             validation = false
         } else if (!/^(?:(http(?:s)?):\/\/.)?[-a-z0-9@%._\+~#=]{1,256}\.[a-z]{2,6}\b(?:[-a-z0-9@:%_\+.~#?&\/\/=]*)$/i.test(targetInput.value.trim()) && targetInput.value.trim().length < 2083) {
-            displayError(targetField, "L'entée n'est pas une URL.")
+            displayError(targetField, "L'entrée n'est pas une URL.")
             validation = false
         } else {
             displayError(targetField, null)
@@ -77,7 +77,7 @@ function validate(step) {
             displayError(sourceField, "Utilisez uniquement des lettres, chiffres, tirets et points.")
             validation = false
         } else if (sourceInput.value.trim().length < 3 || sourceInput.value.trim().length > 64) {
-            displayError(sourceField, "Entre 3 et 64 caractères.")
+            displayError(sourceField, "L'entrée doit contenir entre 3 et 64 caractères.")
             validation = false
         } else {
             displayError(sourceField, null)
