@@ -49,3 +49,12 @@ body { background: var(--background); }
     align-items: center;
     min-height: 100vh;
 }
+.version {
+	position: fixed;
+	user-select: none;
+	bottom: 10px;
+	right: 10px;
+    font-size: 10px; 
+    color: var(--darkGray);
+    z-index: 999;
+}

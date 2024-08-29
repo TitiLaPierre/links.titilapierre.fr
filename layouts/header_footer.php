@@ -50,6 +50,7 @@
     <?php foreach ($js as $file) { ?>
         <script type="text/javascript" src="<?= $file ?>"></script>
     <?php } ?>
+<span class="version"><?= VERSION["id"] ?>-<?= VERSION["environment"] ?></span>
 </body>
 </html>
 <?php } ?>
