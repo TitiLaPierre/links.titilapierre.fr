@@ -1,8 +1,8 @@
 <?php
 
 return [
-    "js" => ["js/stats/calendar/index.js", "js/popup.js"],
-    "css" => ["css/popup.css"]
+    "js" => ["js/stats/index.js", "js/stats/calendar/index.js"],
+    "css" => ["css/stats/calendar/index.css"]
 ];
 
 function render_stats_calendar($link, $year, $month) {
@@ -30,26 +30,26 @@ function render_stats_calendar($link, $year, $month) {
             </div>
             <h1 class="page--title"><?= $link["name"] ?></h1>
             <p class="page--description">
-                Vous pouvez afficher les statistiques pour chaque jour en cliquant sur une case du calendrier.
+                Statistiques du lien par jour pour un mois donné.
             </p>
         </div>
         <div class="calendar">
-            <div class="calendar--header">
-                <div class="calendar--header--warp">
-                    <button class="calendar--header--button" id="calendar--back"><i class="fas fa-arrow-left"></i></button>
-                    <div class="calendar--header--date">
-                        <input class="calendar--header--date--part" id="calendar--month" value="<?= $months[$month - 1] ?>" />
-                        <input class="calendar--header--date--part" id="calendar--year" value="<?= $year ?>" />
+            <div class="statsHeader">
+                <div class="statsHeader--warp">
+                    <button class="statsHeader--button" id="calendar--back"><i class="fas fa-arrow-left"></i></button>
+                    <div class="statsHeader--date">
+                        <input class="statsHeader--date--part" id="calendar--month" value="<?= $months[$month - 1] ?>" maxlength="10" />
+                        <input class="statsHeader--date--part" id="calendar--year" value="<?= $year ?>" maxlength="4" />
                     </div>
-                    <button class="calendar--header--button" id="calendar--next"><i class="fas fa-arrow-right"></i></button>
-                    <button class="calendar--header--button" id="calendar--now"><i class="fa-solid fa-calendar-days"></i></button>
+                    <button class="statsHeader--button" id="calendar--next"><i class="fas fa-arrow-right"></i></button>
+                    <button class="statsHeader--button" id="calendar--now"><i class="fa-solid fa-clock-rotate-left"></i></button>
                 </div>
-                <div class="calendar--header--modes">
-                    <label class="calendar--header--mode" for="mode--total" style="--color: var(--main);">
+                <div class="statsHeader--modes">
+                    <label class="statsHeader--mode" for="mode--total" style="--color: var(--main);">
                         <input type="radio" name="calendar--mode" value="total" id="mode--total" checked>
                         Vues
                     </label>
-                    <label class="calendar--header--mode" for="mode--unique" style="--color: var(--mainDark);">
+                    <label class="statsHeader--mode" for="mode--unique" style="--color: var(--mainDark);">
                         <input type="radio" name="calendar--mode" value="unique" id="mode--unique">
                         Vues uniques
                     </label>

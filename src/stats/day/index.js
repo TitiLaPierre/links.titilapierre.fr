@@ -4,12 +4,31 @@ let { year, month, day } = JSON.parse(document.querySelector("[viewData]").getAt
 const contentGrid = document.querySelector(".grid--content")
 const warningElement = document.querySelector("#grid--warning")
 
-async function updateViews(year, month, day) {
+const previousButton = document.querySelector("#calendar--back")
+const nextButton = document.querySelector("#calendar--next")
+const nowButton = document.querySelector("#calendar--now")
+const backButton = document.querySelector("#calendar--backToMonth")
+
+async function updateViews(newYear, newMonth, newDay) {
+    if (newYear <= 0 && newMonth < 1) return
+
+    const newDate = new Date(newYear, newMonth-1, newDay)
+    year = newDate.getFullYear()
+    month = newDate.getMonth()+1
+    day = newDate.getDate()
+    
+    nextButton.disabled = true
+    previousButton.disabled = true
+
+    if (year == new Date().getFullYear() && month == new Date().getMonth()+1 && day == new Date().getDate()) nowButton.style.display = "none"
+    else nowButton.style.display = null
+    
     const start = new Date(year, month-1, day, 0, 0, 0)
     const end = new Date(year, month-1, day, 23, 59, 59)
     const response = await api_call(url(`/api/stats/${link.uid}/`), { method: "POST", body: { start: Math.floor(start.getTime()/1000), end: Math.floor(end.getTime()/1000) } })
 
     if (response.success) {
+        history.pushState({ year, month }, "", `/stats/${link.uid}/${year.toString().padStart(4, "0")}/${month.toString().padStart(2, "0")}/${day.toString().padStart(2, "0")}/`)
         const viewsPerIps = {}
         response.data.forEach(({ creation_date, ip }) => {
             if (!viewsPerIps[ip]) viewsPerIps[ip] = []
@@ -40,7 +59,28 @@ async function updateViews(year, month, day) {
             warningElement.style.display = null
             contentGrid.style.display = "none"
         }
+        backButton.href = `/stats/${link.uid}/${year.toString().padStart(4, "0")}/${month.toString().padStart(2, "0")}/`
+        backButton.querySelector("span").textContent = `${months[month-1]} ${year}`
+        updateDateDisplay(year, month, day)
     }
+
+    nextButton.disabled = null
+    previousButton.disabled = null
 }
+
+nextButton.addEventListener("click", () => updateViews(year, month, day+1))
+previousButton.addEventListener("click", () => updateViews(year, month, day-1))
+nowButton.addEventListener("click", () => updateViews(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate()))
+
+for (const mode of document.querySelectorAll("[name=calendar--mode]")) {
+    mode.addEventListener("change", () => updateModes(mode.value))
+}
+
+setHandlers({
+    year: (newYear) => updateViews(newYear, month, day),
+    month: (newMonth) => updateViews(year, newMonth, day),
+    day: (newDay) => updateViews(year, month, newDay),
+    reset: () => updateViews(year, month, day)
+})
 
 window.addEventListener("pageshow", () => updateViews(year, month, day))

@@ -19,21 +19,28 @@
         String.prototype.zeros = function(n) {
             return this.length >= n ? this : "0".repeat(n-this.length)+this
         }
+        String.prototype.deaccentuate = function() {
+            return this.normalize('NFD').replace(/\p{Diacritic}/gu, "")
+        }
         function getCookie(name) {
             var value = "; " + document.cookie
             var parts = value.split("; " + name + "=")
             if (parts.length == 2) return parts.pop().split(";").shift()
         }
-        function resizeElement(element) {
-            const text = element.value
-            const [fontFamily, fontSize] = [window.getComputedStyle(element).fontFamily, window.getComputedStyle(element).fontSize]
-
+        function textSize(text, fontFamily, fontSize) {
             const canvas = document.createElement("canvas")
             const context = canvas.getContext("2d")
             context.font = `${fontSize} ${fontFamily}`
-
-            const width = context.measureText(text).width
-            element.style.width = `${width}px`
+            return context.measureText(text).width
+        }
+        function resizeElement(element) {
+            const text = element.value
+            const [fontFamily, fontSize] = [window.getComputedStyle(element).fontFamily, window.getComputedStyle(element).fontSize]
+            element.style.width = `${textSize(text, fontFamily, fontSize)}px`
+        }
+        function maximumElementSize(element) {
+            const maxlength = element.getAttribute("maxlength")
+            return textSize("0".repeat(maxlength), window.getComputedStyle(element).fontFamily, window.getComputedStyle(element).fontSize)   
         }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">

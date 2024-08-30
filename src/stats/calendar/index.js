@@ -1,14 +1,9 @@
 const link = JSON.parse(document.querySelector("[linkData]").getAttribute("linkData"))
 let { year, month } = JSON.parse(document.querySelector("[viewData]").getAttribute("viewData"))
 const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
-const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
 let currentMode
 
-const calendarElement = document.querySelector(".calendar")
-const calendarContentElement = document.querySelector(".calendar--content")
-
-const monthElement = document.querySelector("#calendar--month")
-const yearElement = document.querySelector("#calendar--year")
+const calendarElement = document.querySelector(".calendar--content")
 
 const previousButton = document.querySelector("#calendar--back")
 const nextButton = document.querySelector("#calendar--next")
@@ -106,14 +101,12 @@ function updateModes(newMode) {
 }
 
 async function updateCalendar(newYear, newMonth) {
-    if (newYear == 0 && newMonth < 1) return
+    if (newYear <= 0 && newMonth < 1) return
     currentMode = document.querySelector("[name=calendar--mode]:checked").value
 
-    if (newMonth < 1) newYear--, newMonth += 12
-    while (newMonth > 12) newYear++, newMonth -= 12
-
-    year = newYear
-    month = newMonth
+    const newDate = new Date(newYear, newMonth-1)
+    year = newDate.getFullYear()
+    month = newDate.getMonth()+1
 
     nextButton.disabled = true
     previousButton.disabled = true
@@ -121,8 +114,8 @@ async function updateCalendar(newYear, newMonth) {
     if (year == new Date().getFullYear() && month == new Date().getMonth()+1) nowButton.style.display = "none"
     else nowButton.style.display = null
 
-    const start = new Date(newYear, newMonth-1, 1)
-    const end = new Date(newYear, newMonth, 1, 0, 0, -1)
+    const start = new Date(year, month-1, 1)
+    const end = new Date(year, month, 1, 0, 0, -1)
     const response = await api_call(url(`/api/stats/${link.uid}/`), { method: "POST", body: { start: Math.floor(start.getTime()/1000), end: Math.floor(end.getTime()/1000) } })
 
     if (response.success) {
@@ -143,21 +136,18 @@ async function updateCalendar(newYear, newMonth) {
             if (ipsPerDay[day].length > maximumIps) maximumIps = ipsPerDay[day].length
         })
 
-        history.pushState({ newYear, newMonth }, "", `/stats/${link.uid}/${newYear.toString().padStart(4, "0")}/${newMonth.toString().padStart(2, "0")}/`)
-        const daysCount = new Date(newYear, newMonth, 0).getDate()
-        const blankDaysCount = new Date(newYear, newMonth-1, 0).getDay()
-        calendarContentElement.innerHTML = ""
+        history.pushState({ year, month }, "", `/stats/${link.uid}/${year.toString().padStart(4, "0")}/${month.toString().padStart(2, "0")}/`)
+        const daysCount = new Date(year, month, 0).getDate()
+        const blankDaysCount = new Date(year, month-1, 0).getDay()
+        calendarElement.innerHTML = ""
         for (let i = 0; i < blankDaysCount; i++)
-            calendarContentElement.appendChild(new DisabledCase().build())
+            calendarElement.appendChild(new DisabledCase().build())
         for (let i = 1; i <= daysCount; i++) {
-            calendarContentElement.appendChild(new DayCase(newYear, newMonth, i, viewsPerDay[i], ipsPerDay[i], maximumViews, maximumIps).build())
+            calendarElement.appendChild(new DayCase(year, month, i, viewsPerDay[i], ipsPerDay[i], maximumViews, maximumIps).build())
         }
-        while (calendarContentElement.childElementCount % 7 != 0)
-            calendarContentElement.appendChild(new DisabledCase().build())
-        monthElement.value = months[newMonth-1]
-        yearElement.value = newYear.toString().padStart(4, "0")
-        resizeElement(monthElement)
-        resizeElement(yearElement)
+        while (calendarElement.childElementCount % 7 != 0)
+            calendarElement.appendChild(new DisabledCase().build())
+        updateDateDisplay(year, month, null)
     }
 
     nextButton.disabled = null
@@ -174,42 +164,10 @@ for (const mode of document.querySelectorAll("[name=calendar--mode]")) {
     mode.addEventListener("change", () => updateModes(mode.value))
 }
 
-monthElement.addEventListener("input", function() {
-    this.value = this.value.replace(/[^\p{L}\p{N}]/gu, "").slice(0, 10)
-    resizeElement(this)
-})
-yearElement.addEventListener("input", function() {
-    this.value = this.value.replace(/\D/g, "").slice(0, 4)
-    resizeElement(this)
-})
-
-monthElement.addEventListener("blur", function() {
-    if (this.value == "") {
-        this.value = months[month-1]
-        resizeElement(this)
-    } else {
-        // Search for the month in the list (case and accent insensitive)
-        const newMonth = months.findIndex(month => month.toLowerCase().startsWith(this.value.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '')))
-        if (newMonth != -1) updateCalendar(year, newMonth+1)
-        else {
-            this.value = months[month-1]
-            resizeElement(this)
-        }
-    }
-})
-yearElement.addEventListener("blur", function() {
-    if (this.value == "") {
-        this.value = year
-        resizeElement(this)
-    } else updateCalendar(parseInt(this.value), month)
-})
-
-
-window.addEventListener("keydown", function(e) {
-    if (e.key == "Enter") {
-        if (monthElement === document.activeElement) yearElement.focus()
-        else if (yearElement === document.activeElement) yearElement.blur()
-    }
+setHandlers({
+    year: (newYear) => updateCalendar(newYear, month),
+    month: (newMonth) => updateCalendar(year, newMonth),
+    reset: () => updateDateDisplay(year, month, null)
 })
 
 window.addEventListener("pageshow", () => updateCalendar(year, month))
