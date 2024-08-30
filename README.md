@@ -1,6 +1,6 @@
 # Liens — TitiLaPierre
 
-Ce site est une reprise des sites raccourcisseur d'URL permettant de collecter quelques statistiques lorsque des utilisateurs accèdent au lieu et comprenant d'autres fonctionnalités.
+Ce site est une reprise des sites raccourcisseur d'URL permettant de collecter quelques statistiques lorsque des utilisateurs accèdent à un lien et comprenant d'autres fonctionnalités.
 
 ## Installer le projet
 
@@ -29,7 +29,7 @@ Vous pouvez maintenant modifier le fichier `config.json`.
 ```json
 {
     "version": {
-		"environment": "stable", // Détermine quelle environnement est à utilisé parmi ceux ci-dessous
+		"environment": "stable", // Détermine quelle environnement est à utiliser parmi ceux ci-dessous
 		"id": "vX.X.X" // Le nom de la version
 	}, "environments": { // Ici, vous pouvez créer plusieurs environnements qui permettront d'exécuter le projet dans des conditions différentes 
 		"stable": {
@@ -84,6 +84,6 @@ node watch.js
 #### Passage de développement à production
 
 Modifiez la clé `version` > `environment` du fichier `config.json` par l'environnement de production.
-Envoyez vous fichiers sur le serveur de production.
+Envoyez vos fichiers sur le serveur de production.
 
 > Vous n'avez pas besoin d'envoyer tous les fichiers en production. La partie servant au build des fichiers SCSS et à la répartition des fichiers JS/SCSS (`node_modules`, `package.json`, `package-lock.json`, `watch.js`, `global/`, `.vscode`) ainsi que les fichiers nécessaire au projet Git (`.git`, `.gitignore`, `README.md`) ne sont pas nécessaires.

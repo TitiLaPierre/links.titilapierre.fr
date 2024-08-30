@@ -49,6 +49,16 @@
         i { color: inherit; }
         &.button__main { background: var(--black); color: var(--white); }
         &.button__secondary { background: var(--light); }
-        &.button__danger { background: var(--error); }
+        &.button__danger { background: var(--error); color: var(--on-error) }
     }
+}
+
+#scrim {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: var(--scrim);
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
 }
