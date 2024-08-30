@@ -20,6 +20,13 @@ function render_stats_day($link, $year, $month, $day) {
                     Gérer le lien
                 </a>
             </div>
+            <div class="page--icon--wrapper">
+            <?php if (isset($link["icon_uid"])) { ?>                
+                <img class="page--icon" alt="Icone du lien" src="media/<?= $link["icon_uid"] ?>">
+            <?php } else { ?>
+                <span class="page--icon fas fa-earth-europe"></span>
+            <?php } ?>
+            </div>
             <h1 class="page--title"><?= $link["name"] ?></h1>
             <p class="page--description">
                 Statistiques du <?= $day ?> <?= $months[$month-1] ?> <?= $year ?>.

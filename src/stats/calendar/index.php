@@ -21,6 +21,13 @@ function render_stats_calendar($link, $year, $month) {
                     Gérer le lien
                 </a>
             </div>
+            <div class="page--icon--wrapper">
+            <?php if (isset($link["icon_uid"])) { ?>                
+                <img class="page--icon" alt="Icone du lien" src="media/<?= $link["icon_uid"] ?>">
+            <?php } else { ?>
+                <span class="page--icon fas fa-earth-europe"></span>
+            <?php } ?>
+            </div>
             <h1 class="page--title"><?= $link["name"] ?></h1>
             <p class="page--description">
                 Vous pouvez afficher les statistiques pour chaque jour en cliquant sur une case du calendrier.

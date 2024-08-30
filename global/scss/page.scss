@@ -13,15 +13,18 @@ body { overflow: hidden; }
     max-width: 500px;
     width: 100%;
 }
-button.page--icon--wrapper {
+.page--icon--wrapper {
     background: none;
     border: none;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
     margin-bottom: 25px;
     width: 64px;
     height: 64px;
+    user-select: none;
+}
+button.page--icon--wrapper {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
     .page--icon--action {
         @include absolute($top: 0, $left: 0, $right: 0, $bottom: 0);
         @include flex(row, $align: center, $justify: center);
@@ -42,6 +45,7 @@ button.page--icon--wrapper {
     @include radius("medium");
     width: 64px;
     height: 64px;
+    pointer-events: none;
 }
 span.page--icon {
     @include flex(row, $justify: center, $align: center);
