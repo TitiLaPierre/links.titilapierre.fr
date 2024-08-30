@@ -80,6 +80,6 @@ node watch.js
 #### Passage de développement à production
 
 Modifiez la clé `version` > `environment` du fichier `config.json` par l'environnement de production.
-Envoyez vous fichiers sur le serveur de production.
+Envoyez vos fichiers sur le serveur de production.
 
 > Vous n'avez pas besoin d'envoyer tous les fichiers en production. La partie servant au build des fichiers SCSS et à la répartition des fichiers JS/SCSS (`node_modules`, `package.json`, `package-lock.json`, `watch.js`, `global/`, `.vscode`) ainsi que les fichiers nécessaire au projet Git (`.git`, `.gitignore`, `README.md`) ne sont pas nécessaires.
