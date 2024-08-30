@@ -10,9 +10,13 @@ function openPopup(data) {
         popup = document.createElement("div")
         popup.id = "popup"
         document.body.appendChild(popup)
+        scrim = document.createElement("div")
+        scrim.id = "scrim"
+        document.body.appendChild(scrim)
     }
 
     popup.innerHTML = `
+        
         <div class="popup--header">
             <h2>${data.title}</h2>
             <button class="popup--close" onclick="closePopup()"><i class="fa-solid fa-times"></i></button>
@@ -30,10 +34,13 @@ function openPopup(data) {
         </div>
     `
     popup.style.display = "flex"
+    scrim.style.display = "block"
 }
 
 function closePopup() {
     window.removeEventListener("click", handleClick)
     const popup = document.getElementById("popup")
     popup.style.display = "none"
+    const scrim = document.getElementById("scrim")
+    scrim.style.display = "none"
 }
