@@ -98,8 +98,8 @@ img.page--icon { object-fit: cover; }
     cursor: pointer;
     user-select: none;
     &.action__main { background: var(--black); color: var(--white); }
-    &.action__danger { background: var(--error); }
-    &:disabled { opacity: .6; cursor: not-allowed; }
+    &.action__danger { background: var(--error); color: var(--on-error) }
+    &:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; background-color: var(--lightGray); }
     > * { color: inherit; }
 }
 .page--action:has(.page--steps) { cursor: default; }
@@ -130,7 +130,7 @@ img.page--icon { object-fit: cover; }
     padding-inline: 10px;
     font-size: 16px;
     outline: none;
-    &:disabled { cursor: inherit; }
+    &:disabled { cursor: inherit; background-color: transparent; }
 }
 
 .page--warning {
