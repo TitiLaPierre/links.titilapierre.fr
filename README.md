@@ -28,7 +28,7 @@ Vous pouvez maintenant modifier le fichier `config.json`.
 ```json
 {
     "version": {
-		"environment": "stable", // Détermine quelle environnement est à utilisé parmi ceux ci-dessous
+		"environment": "stable", // Détermine quelle environnement est à utiliser parmi ceux ci-dessous
 		"id": "vX.X.X" // Le nom de la version
 	}, "environments": { // Ici, vous pouvez créer plusieurs environnements qui permettront d'exécuter le projet dans des conditions différentes 
 		"stable": {
