@@ -10,6 +10,7 @@ Ce site est une reprise des sites raccourcisseur d'URL permettant de collecter q
 
 - NodeJS
 - Serveur Apache (exemple : WampServer pour Windows)
+- Serveur MySQL
 - *VS Code (conseillé seulement)*
 
 #### Installation
@@ -52,6 +53,8 @@ Ensuite, créez un fichier `secret.json` à la racine du projet pour y intégrer
 }
 ```
 
+Vous pouvez maintenant importer le fichier `structure.sql` dans votre base de données MySQL.
+
 Ensuite, lorsque vous codez, votre projet doit pouvoir build les fichiers SCSS et les placer dans le bon dossier ainsi qu'avec les fichiers JS. C'est ici qu'intervient le projet NodeJS.
 
 ##### J'ai VS Code
@@ -76,6 +79,7 @@ node watch.js
 #### Pré-requis
 
 - Serveur Apache
+- Serveur MySQL
 
 #### Passage de développement à production
 
