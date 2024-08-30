@@ -1,6 +1,6 @@
 # Liens — TitiLaPierre
 
-Ce site est une reprise des sites raccourcisseur d'URL permettant de collecter quelques statistiques lorsque des utilisateurs accèdent au lieu et comprenant d'autres fonctionnalités.
+Ce site est une reprise des sites raccourcisseur d'URL permettant de collecter quelques statistiques lorsque des utilisateurs accèdent à un lien et comprenant d'autres fonctionnalités.
 
 ## Installer le projet
 
