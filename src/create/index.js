@@ -38,11 +38,11 @@ function showStep(step) {
     if (step < stepElements.length-1) {
         nextButton.classList.remove("action__main")
         nextButton.querySelector("span").innerText = "Suivant"
-        nextButton.querySelector("i").className = "fas fa-arrow-right"
+        nextButton.querySelector("i").className = "fa-solid fa-arrow-right"
     } else {
         nextButton.classList.add("action__main")
         nextButton.querySelector("span").innerText = "Publier"
-        nextButton.querySelector("i").className = "fas fa-check"
+        nextButton.querySelector("i").className = "fa-solid fa-check"
     }
 
     validate(step)

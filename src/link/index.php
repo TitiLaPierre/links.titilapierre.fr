@@ -28,16 +28,16 @@ function render($settings) {
     <div class="page--infos">
         <div class="page--actions">
             <a class="page--action" href="dashboard/links/">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fa-solid fa-arrow-left"></i>
                 Voir la liste des liens
             </a>
             <a class="page--action" href="stats/<?= $link["uid"] ?>/">
-                <i class="fas fa-chart-line"></i>
+                <i class="fa-solid fa-chart-line"></i>
                 Statistiques
             </a>
         </div>
         <button class="page--icon--wrapper">
-            <span class="page--icon fas fa-earth-europe" <?php if (isset($link["icon_uid"])) { ?>style="display: none;"<?php } ?>></span>
+            <span class="page--icon fa-solid fa-earth-europe" <?php if (isset($link["icon_uid"])) { ?>style="display: none;"<?php } ?>></span>
             <img class="page--icon" alt="Icone du lien"  <?php if (empty($link["icon_uid"])) { ?>style="display: none;"<?php } else { ?>src="media/<?= $link["icon_uid"] ?>"<?php } ?>>
             <span class="page--icon--action"><i class="fa-solid fa-rotate-right"></i></span>
         </button>
@@ -58,7 +58,7 @@ function render($settings) {
                 </div>
                 <button class="link--url" copy="<?= VERSION["base_url"].$link["source_url"]."/" ?>">
                     <span><?= VERSION["base_url"]?><u><?= $link["source_url"]?></u>/</span>
-                    <i class="fas fa-copy" copied="fas fa-check"></i>
+                    <i class="fa-solid fa-copy" copied="fa-solid fa-check"></i>
                 </button>
             </div>
             <div class="link">
@@ -70,14 +70,14 @@ function render($settings) {
                 </div>
                 <button class="link--url" copy="<?= $link["redirect_url"] ?>">
                     <u><?= $link["redirect_url"] ?></u>
-                    <i class="fas fa-copy" copied="fas fa-check"></i>
+                    <i class="fa-solid fa-copy" copied="fa-solid fa-check"></i>
                 </button>
             </div>
         </div>
         <div class="dual--item">
             <h2 class="dual--title">
                 QR Code
-                <a class="dual--button" href="media/<?= $link["qrcode_uid"] ?>" download="qrcode_<?= $link["source_url"] ?>.png" target="_blank"><i class="fas fa-download"></i></a>
+                <a class="dual--button" href="media/<?= $link["qrcode_uid"] ?>" download="qrcode_<?= $link["source_url"] ?>.png" target="_blank"><i class="fa-solid fa-download"></i></a>
             </h2>
             <div>
                 <img class="qrcode" src="media/<?= $link["qrcode_uid"] ?>" alt="QR Code">
@@ -86,11 +86,11 @@ function render($settings) {
     </div>
     <div class="page--actions">
         <button class="page--action" id="edit" disabled>
-            <i class="fas fa-edit"></i>
+            <i class="fa-solid fa-edit"></i>
             Modifier
         </button>
         <button class="page--action action__danger" id="delete">
-            <i class="fas fa-trash"></i>
+            <i class="fa-solid fa-trash"></i>
             Supprimer définitivement
         </button>
     </div>

@@ -20,25 +20,25 @@ $minimized = $navbar_state && $navbar_state === "minimized" ? "minimized" : "";
         <div class="navbar--group">
             <hr class="navbar--separator">
             <a href="dashboard/" class="navbar--link <?= $link_selection["home"] ?>">
-                <i class="fas fa-house"></i>
+                <i class="fa-solid fa-house"></i>
                 <span class="minimizable">Accueil</span>
             </a>
             <a href="dashboard/links/" class="navbar--link <?= $link_selection["links"] ?>">
-                <i class="fas fa-link"></i>
+                <i class="fa-solid fa-link"></i>
                 <span class="minimizable">Liens</span>
             </a>
             <a href="dashboard/campaigns/" class="navbar--link <?= $link_selection["campaigns"] ?>">
-                <i class="fas fa-layer-group"></i>
+                <i class="fa-solid fa-layer-group"></i>
                 <span class="minimizable">Campagnes</span>
             </a>
         </div>
         <div class="navbar--group">
             <span class="navbar--profile">
-                <i class="fas fa-circle-user"></i>
+                <i class="fa-solid fa-circle-user"></i>
                 <span class="minimizable"><?= $user["username"] ?></span>
             </span>
             <a href="logout/" class="navbar--link">
-                <i class="fas fa-sign-out-alt"></i>
+                <i class="fa-solid fa-sign-out-alt"></i>
                 <span class="minimizable">Déconnexion</span>
             </a>
         </div>

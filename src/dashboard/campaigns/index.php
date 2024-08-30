@@ -7,11 +7,11 @@ function render_dashboard_campaigns() { ?>
         <div class="page--infos">
             <div class="page--actions">
                 <button class="page--action" disabled>
-                    <i class="fas fa-plus"></i>
+                    <i class="fa-solid fa-plus"></i>
                     Créer une campagne
                 </button>
                 <button class="page--action" onclick="this.querySelector('.page--search').focus()" disabled>
-                    <i class="fas fa-search"></i>
+                    <i class="fa-solid fa-search"></i>
                     <input class="page--search" type="text" placeholder="Rechercher" disabled>
                 </button>
             </div>

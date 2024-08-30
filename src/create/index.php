@@ -19,7 +19,7 @@ function render($settings) {
         <div class="page--infos">
             <div class="page--actions">
                 <a class="page--action" href="dashboard/links/">
-                    <i class="fas fa-arrow-left"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
                     Voir la liste des liens
                 </a>
                 <div class="page--action">
@@ -80,12 +80,12 @@ function render($settings) {
         </section>
         <div class="page--actions">
             <button class="page--action form--back" style="display: none;">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fa-solid fa-arrow-left"></i>
                 <span>Précédent</span>
             </button>
             <button class="page--action form--next" style="display: none;">
                 <span>Suivant</span>
-                <i class="fas fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right"></i>
             </button> 
         </div>
     </main>

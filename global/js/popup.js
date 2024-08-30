@@ -15,7 +15,7 @@ function openPopup(data) {
     popup.innerHTML = `
         <div class="popup--header">
             <h2>${data.title}</h2>
-            <button class="popup--close" onclick="closePopup()"><i class="fas fa-times"></i></button>
+            <button class="popup--close" onclick="closePopup()"><i class="fa-solid fa-times"></i></button>
         </div>
         <div class="popup--content">
             ${data.paragraphs.map(paragraph => `<p class="popup--paragraph">${paragraph}</p>`).join("")}
