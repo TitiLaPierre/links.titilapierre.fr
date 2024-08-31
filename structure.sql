@@ -16,32 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `links`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `links`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `links` (
-  `uid` varchar(32) DEFAULT NULL,
-  `name` varchar(64) NOT NULL,
-  `source_url` varchar(64) NOT NULL,
-  `redirect_url` varchar(2083) NOT NULL,
-  `icon_uid` varchar(32) DEFAULT NULL,
-  `qrcode_uid` varchar(32) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `views` int(11) NOT NULL DEFAULT 0,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` text NOT NULL,
   `creation_date` int(11) NOT NULL,
-  `last_activity` int(11) NOT NULL,
-  UNIQUE KEY `source_url` (`source_url`) USING BTREE,
-  UNIQUE KEY `uid` (`uid`),
-  KEY `user_id` (`user_id`),
-  KEY `media_id` (`icon_uid`),
-  KEY `qrcode_uid` (`qrcode_uid`),
-  CONSTRAINT `links_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `links_ibfk_2` FOREIGN KEY (`icon_uid`) REFERENCES `medias` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `links_ibfk_3` FOREIGN KEY (`qrcode_uid`) REFERENCES `medias` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,19 +71,32 @@ CREATE TABLE `sessions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `links`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `links`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL,
-  `password` text NOT NULL,
+CREATE TABLE `links` (
+  `uid` varchar(32) DEFAULT NULL,
+  `name` varchar(64) NOT NULL,
+  `source_url` varchar(64) NOT NULL,
+  `redirect_url` varchar(2083) NOT NULL,
+  `icon_uid` varchar(32) DEFAULT NULL,
+  `qrcode_uid` varchar(32) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `views` int(11) NOT NULL DEFAULT 0,
   `creation_date` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `last_activity` int(11) NOT NULL,
+  UNIQUE KEY `source_url` (`source_url`) USING BTREE,
+  UNIQUE KEY `uid` (`uid`),
+  KEY `user_id` (`user_id`),
+  KEY `media_id` (`icon_uid`),
+  KEY `qrcode_uid` (`qrcode_uid`),
+  CONSTRAINT `links_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `links_ibfk_2` FOREIGN KEY (`icon_uid`) REFERENCES `medias` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `links_ibfk_3` FOREIGN KEY (`qrcode_uid`) REFERENCES `medias` (`uid`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
