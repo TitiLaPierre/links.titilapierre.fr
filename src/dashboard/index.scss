@@ -124,3 +124,23 @@ img.linkPreview--icon { object-fit: cover; }
     color: var(--darkGray);
     u { text-decoration: underline 3px var(--info); }
 }
+.accountInfos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0px;
+}
+.accountInfos--icon {
+    font-size: 80px;
+}
+.accountInfos--description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.accountInfos--creationDate {
+    margin-bottom: 20px;
+}
+.updatePassword {
+    margin-top: 20px;
+}
