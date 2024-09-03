@@ -6,13 +6,18 @@
 
 :root {
 	--mainDark: #F59C4E;
+	--onMainDark: #FFFFFF;
 	--main: #f5bd4e;
+	--onMain: #292929;
 	--mainLight: #fff7b8;
+	--onMainLight: #292929;
 
 	--error: #ff4848;
-	--on-error: #ffffff;
-	--success: #b7ff95;
-	--info: #717bff;
+	--onError: #ffffff;
+	--success: #87ff50;
+	--onSuccess: #292929;
+	--info: #4e5aff;
+	--onInfo: #ffffff;
 
 	--black: #292929;
 	--darkGray: #5f5f5f;
