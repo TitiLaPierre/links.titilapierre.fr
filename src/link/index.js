@@ -21,9 +21,10 @@ deleteButton.addEventListener("click", async function(e) {
             "Cette opération est irréversible.",
         ],
         actions: [
-            { text: "Annuler", icon: "fa-solid fa-arrow-left", appearance: "secondary", execute: "closePopup()" },
+            { text: "Annuler", icon: "", appearance: "secondary", execute: "closePopup()" },
             { text: "Supprimer", icon: "fa-solid fa-trash", appearance: "danger", execute: `deleteLink('${link.uid}')` },
-        ]
+        ],
+        type: [""]
     })
 })
 
