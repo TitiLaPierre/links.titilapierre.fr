@@ -49,7 +49,35 @@
         i { color: inherit; }
         &.button__main { background: var(--black); color: var(--white); }
         &.button__secondary { background: var(--light); }
-        &.button__danger { background: var(--error); color: var(--on-error) }
+        &.button__danger { background: var(--error); color: var(--onError) }
+        &:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; background-color: var(--lightGray); }
+    }
+    .popup--inputContainer {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .popup--input {
+        @include radius("small");
+        border-style: solid;
+        border-color: var(--light);
+        border-width: 2px;
+        padding: 10px;
+        font-size: 14px;
+        outline: none;
+        flex-grow: 1;
+    }
+    .popup--input:focus {
+        border-color: var(--main);
+    }
+    .popup--inputButton {
+        @include flex(row, $align: center, $justify: center);
+        @include radius("medium");
+        border: none;
+        background: var(--white);
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
     }
 }
 
@@ -61,4 +89,19 @@
     width: 100vw;
     height: 100vh;
     z-index: 999;
+}
+
+.snackbar {
+    @include radius("medium");
+    @include shadow("normal");
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    translate: -50% 0%;
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transform: translate(0px, 200px);
 }
