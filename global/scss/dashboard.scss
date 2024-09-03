@@ -57,14 +57,6 @@
     }
     &:hover::before { background: var(--main); }
 }
-.navbar--profile {
-    @include flex(row, 15px, $align: center);
-    @include radius("small");
-    padding: 12px 20px;
-    font-weight: 600;
-    background: var(--light);
-    user-select: none;
-}
 .navbar--minimize {
     @include absolute($top: 5px, $right: 0);
     @include radius("round");

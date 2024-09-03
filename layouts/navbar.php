@@ -1,5 +1,5 @@
 <?php function layout_navbar($selection=null) {
-$link_selection = ["home" => "", "links" => "", "campaigns" => ""];
+$link_selection = ["home" => "", "links" => "", "campaigns" => "", "account" => ""];
 $link_selection[$selection] = "link__selected";
 $user = get_user();
 $navbar_state = $_COOKIE["navbar_state"] ?? null;
@@ -33,10 +33,10 @@ $minimized = $navbar_state && $navbar_state === "minimized" ? "minimized" : "";
             </a>
         </div>
         <div class="navbar--group">
-            <span class="navbar--profile">
+            <a href="dashboard/account/" class="navbar--link navbar--profile <?= $link_selection["account"] ?>">
                 <i class="fa-solid fa-circle-user"></i>
                 <span class="minimizable"><?= $user["username"] ?></span>
-            </span>
+            </a>
             <a href="logout/" class="navbar--link">
                 <i class="fa-solid fa-sign-out-alt"></i>
                 <span class="minimizable">Déconnexion</span>
