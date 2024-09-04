@@ -30,4 +30,7 @@ function render_dashboard_account() {
             </div>
         </section>
     </main>
+    <script>
+        const username = "<?= $user["username"] ?>"
+    </script>
 <?php } ?>

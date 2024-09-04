@@ -1,30 +1,19 @@
 const updatePasswordButton = document.querySelector("#updatePassword--button")
 
-async function isVerifiedUser(username, password) {
-    const response = await api_call(url("api/login/"), { method: "POST",
-        body: { username: username, password: password }
+async function updatePassword() {
+    // const username = document.getElementById("username").textContent
+    const oldPassword = document.getElementById("oldPasswordInput").value
+    const newPassword = document.getElementById("newPasswordInput").value
+    const response = await api_call(url("/api/password/"), { method: "UPDATE",
+        body: { username: username, oldPassword: oldPassword, newPassword: newPassword },
     })
-    return response.success
-}
-
-async function updatePassword(uid) {
-    const username = document.getElementById("username").textContent;
-    const oldPassword = document.getElementById("oldPasswordInput").value;
-    const isVerified = await isVerifiedUser(username, oldPassword);
-    if (isVerified) {
-        const response = await api_call(url(`/api/password/${uid}/`), { method: "UPDATE",
-            body: { password: document.getElementById("newPasswordInput").value },
-        })
-        if (response.success) {
-            closePopup()
-            openSnackbar({"text": "Votre mot de passe a été mis à jour avec succès !", "icon": "fa-solid fa-check", "bgColor": "success"})
-        } else {
-            closePopup()
-            openSnackbar({"text": "Erreur : "+response.code, "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
-        }
-    } else {
-        closePopup()
+    closePopup()
+    if (response.success) {
+        openSnackbar({"text": "Votre mot de passe a été mis à jour avec succès !", "icon": "fa-solid fa-check", "bgColor": "success"})
+    } else if (response.code == "INVALID_CREDENTIALS") {
         openSnackbar({"text": "Erreur : votre mot de passe actuel est incorrect.", "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
+    } else {
+        openSnackbar({"text": "Erreur : "+response.code, "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
     }
 }
 
@@ -37,7 +26,7 @@ updatePasswordButton.addEventListener("click", async function (e) {
         ],
         actions: [
             { text: "Annuler", icon: "", appearance: "secondary", execute: "closePopup()" },
-            { text: "Modifier", icon: "fa-solid fa-edit", appearance: "main", execute: `updatePassword()` },
+            { text: "Modifier", icon: "fa-solid fa-edit", appearance: "main", execute: "updatePassword()" },
         ],
         type: ["password"]
     })
