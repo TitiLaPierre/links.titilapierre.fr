@@ -1,11 +1,10 @@
 const updatePasswordButton = document.querySelector("#updatePassword--button")
 
 async function updatePassword() {
-    // const username = document.getElementById("username").textContent
     const oldPassword = document.getElementById("oldPasswordInput").value
     const newPassword = document.getElementById("newPasswordInput").value
     const response = await api_call(url("/api/password/"), { method: "UPDATE",
-        body: { username: username, oldPassword: oldPassword, newPassword: newPassword },
+        body: { oldPassword: oldPassword, newPassword: newPassword },
     })
     closePopup()
     if (response.success) {
