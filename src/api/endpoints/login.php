@@ -10,7 +10,7 @@ function endpoint_login($params, $data) {
     $token = generate_token();
     sql_query("INSERT INTO sessions (user_id, token, creation_date) VALUES (?, ?, ?)", [$account["id"], $token, time()]);
 
-    return [ "success" => true, "code" => "LOGIN_SUCCESS", "token" => $token, "uid" => $account["id"] ];
+    return [ "success" => true, "code" => "LOGIN_SUCCESS", "token" => $token ];
 }
 
 ?>
