@@ -91,6 +91,6 @@ function openSnackbar(data) {
         snackbar.style.transform = "translate(0px, 200px)"
         setTimeout(() => {
             snackbar.remove()
-        }, "2000");
-    }, "2000");
+        }, "2000")
+    }, "2000")
 }

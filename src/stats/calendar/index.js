@@ -58,7 +58,7 @@ class DayCase extends Case {
 
         if (views) {
             const scale = views*100/maximumViews
-            const opacity = 0.25 + 0.75*scale/100;
+            const opacity = 0.25 + 0.75*scale/100
             
             const valueElement = document.createElement("span")
             valueElement.classList.add("calendar--data")
@@ -74,7 +74,7 @@ class DayCase extends Case {
 
         if (ips) {
             const scale = ips.length*100/maximumIps
-            const opacity = 0.25 + 0.75*scale/100;
+            const opacity = 0.25 + 0.75*scale/100
 
             const ipsElement = document.createElement("span")
             ipsElement.classList.add("calendar--data")
