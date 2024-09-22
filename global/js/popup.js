@@ -65,6 +65,27 @@ function openPopup(data) {
     scrim.style.display = "block"
 }
 
+function showPopupMessage(data) {
+    let popup = document.querySelector("#popup")
+    if (popup) {
+        let popupMessage = document.querySelector("#popup--message")
+        if (!popupMessage) {
+            popupMessage = document.createElement("div")
+            popupMessage.id = "popup--message"
+        }
+        popupMessage.style.backgroundColor = `var(--${data.bgColor})`
+        let popupMessageIcon = ""
+        if (data.icon != "") {
+            popupMessageIcon = `<i style="color: var(--on${data.bgColor.charAt(0).toUpperCase() + data.bgColor.slice(1)})" class="${data.icon}"></i>`
+        }
+        popupMessage.innerHTML = `
+        ${popupMessageIcon}
+        <span style="color: var(--on${data.bgColor.charAt(0).toUpperCase() + data.bgColor.slice(1)})">${data.text}</span>
+        `
+        popup.insertBefore(popupMessage, popup.childNodes[2])
+    }
+}
+
 function closePopup() {
     window.removeEventListener("click", handleClick)
     const popup = document.getElementById("popup")
@@ -92,5 +113,5 @@ function openSnackbar(data) {
         setTimeout(() => {
             snackbar.remove()
         }, "2000")
-    }, "2000")
+    }, "4000")
 }
