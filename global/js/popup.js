@@ -86,22 +86,6 @@ function closePopup() {
     scrim.style.display = "none"
 }
 
-function showHidePassword(type) {
-    let pwdInput = document.getElementById("oldPasswordInput")
-    let showHideBtn = document.querySelector("#oldPasswordButton>i")
-    if (type == "new") {
-        pwdInput = document.getElementById("newPasswordInput")
-        showHideBtn = document.querySelector("#newPasswordButton>i")
-    }
-    if (pwdInput.getAttribute("type") == "password") {
-        pwdInput.setAttribute("type", "text")
-        showHideBtn.className = "fa-solid fa-eye-slash"
-    } else {
-        pwdInput.setAttribute("type", "password")
-        showHideBtn.className = "fa-solid fa-eye"
-    }
-}
-
 function openSnackbar(data) {
     let snackbar = document.createElement("div")
     snackbar.className = "snackbar"

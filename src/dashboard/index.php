@@ -30,7 +30,7 @@ if (!is_logged()) {
     return combine_settings([
         "title" => "Compte",
         "css" => ["css/dashboard.css", "css/page.css", "css/dashboard/index.css", "css/popup.css"],
-        "js" => ["js/dashboard.js", "js/dashboard/account/index.js", "js/popup.js"],
+        "js" => ["js/dashboard.js", "js/dashboard/account/index.js", "js/password.js", "js/popup.js"],
         "action" => "render_dashboard_account",
         "navbar" => "account"
     ], require_once("src/dashboard/account/index.php"));
