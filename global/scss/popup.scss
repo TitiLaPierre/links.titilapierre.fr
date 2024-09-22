@@ -11,9 +11,9 @@
     background: white;
     z-index: 1000;
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     overflow: hidden;
-    > * { padding: 15px 25px; }
+    > * { padding: 25px 35px; }
     .popup--close {
         @include flex(row, $align: center, $justify: center);
         @include radius("medium");
@@ -29,10 +29,30 @@
     }
     .popup--content {
         @include flex(column, 25px);
-        padding-block: 25px;
     }
     .popup--paragraph {
+        font-size: 14px;
+        color: var(--darkGray);
+    }
+    .popup--title {
         font-size: 16px;
+        font-weight: 600;
+        color: var(--black);
+        position: relative;
+    }
+    .popup--title::before {
+        @include absolute($top: 0px, $left: -10px);
+        @include radius("small");
+        content: "";
+        translate: -100% 0;
+        background: var(--main);
+        width: 4px;
+        height: 100%;
+
+    }
+    .popup--list { margin-left: 20px; }
+    .popup--item {
+        font-size: 12px;
         color: var(--darkGray);
     }
     .popup--actions {
@@ -89,6 +109,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 999;
+    transition-duration: 0s;
 }
 
 .snackbar {
