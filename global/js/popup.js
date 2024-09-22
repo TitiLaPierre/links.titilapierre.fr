@@ -21,16 +21,29 @@ function openPopup(data) {
             <button class="popup--close" onclick="closePopup()"><i class="fa-solid fa-times"></i></button>
         </div>
         <div class="popup--content">
-            ${data.paragraphs.map(paragraph => `<p class="popup--paragraph">${paragraph}</p>`).join("")}
-            ${data.type.map(type => {
-                if (type == "password") {
+            ${data.content.map(element => {
+                if (element.type == "paragraph") {
+                    return `<div class="popup--section">
+                        ${element.title ? `<h3 class="popup--title">${element.title}</h3>` : ""}
+                        <p class="popup--paragraph">${element.text}</p>
+                    </div>`
+                } else if (element.type == "list") {
+                    return `<div class="popup--section">
+                        ${element.title ? `<p class="popup--item">${element.title}</p>` : ""}
+                        <ul class="popup--list">
+                            ${element.items.map(item => `<li class="popup--item">${item}</li>`).join("")}
+                        </ul>
+                    </div>`
+                } else if (element.type == "input") {
                     return `<div class="popup--inputContainer">
-                        <input id="oldPasswordInput" class="popup--input" placeholder="Ancien mot de passe" type="password">
-                        <button id="oldPasswordButton" class="popup--inputButton" onclick="showHidePassword('old')"><i class="fa-solid fa-eye"></i></button>
-                    </div>
-                    <div class="popup--inputContainer">
-                        <input id="newPasswordInput" class="popup--input" placeholder="Nouveau mot de passe" type="password">
-                        <button id="newPasswordButton" class="popup--inputButton" onclick="showHidePassword('new')"><i class="fa-solid fa-eye"></i></button>
+                        <input
+                            id="${element.id}"
+                            class="popup--input"
+                            placeholder="${element.placeholder}"
+                            type="${element.inputType}"
+                            ${element.input ? `oninput="${element.input}"` : ""}
+                        >
+                        ${element.inputType == "password" ? `<button class="popup--inputButton" onclick="showHidePassword(this, '${element.id}')"><i class="fa-solid fa-eye"></i></button>` : ""}
                     </div>`
                 }
             }).join("")}
@@ -41,39 +54,13 @@ function openPopup(data) {
                 if (action.icon != "") {
                     buttonIcon = `<i class="${action.icon}"></i>`
                 }
-                return `<button class="popup--button button__${action.appearance}" onclick="${action.execute}">
+                return `<button class="popup--button button__${action.appearance}" onclick="${action.execute}" ${action.disabled ? "disabled" : ""} ${action.id ? `id="${action.id}"` : ""}>
                     ${buttonIcon}
                     ${action.text}
                 </button>`
             }).join("")}
         </div>
     `
-    const mainButton = document.querySelector(".popup--button.button__main")
-    const oldPasswordInput = document.querySelector("#oldPasswordInput")
-    const newPasswordInput = document.querySelector("#newPasswordInput")
-    if (data.type[0] == "password") {
-        mainButton.setAttribute("disabled", "")
-        oldPasswordInput.addEventListener("input", () => {
-            if (oldPasswordInput.value.length > 0 && newPasswordInput.value.length > 0) {
-                mainButton.removeAttribute("disabled")
-            } else {
-                mainButton.setAttribute("disabled", "")
-            }
-        })
-        newPasswordInput.addEventListener("input", () => {
-            if (oldPasswordInput.value.length > 0 && newPasswordInput.value.length > 0) {
-                mainButton.removeAttribute("disabled")
-            } else {
-                mainButton.setAttribute("disabled", "")
-            }
-        })
-    }
-    oldPasswordInput.addEventListener("keypress", function(e) {
-        if (e.key == "Enter") mainButton.click()
-    })
-    newPasswordInput.addEventListener("keypress", function(e) {
-        if (e.key == "Enter") mainButton.click()
-    })
     popup.style.display = "flex"
     scrim.style.display = "block"
 }
