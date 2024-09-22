@@ -39,6 +39,7 @@ async function updateViews(newYear, newMonth, newDay) {
 
     if (response.success) {
         history.pushState({ year, month }, "", `/stats/${link.uid}/${year.toString().padStart(4, "0")}/${month.toString().padStart(2, "0")}/${day.toString().padStart(2, "0")}/`)
+        closeSidebar()
         viewsPerIps = {}
         response.data.forEach(({ creation_date, ip }) => {
             if (!viewsPerIps[ip]) viewsPerIps[ip] = []
@@ -103,7 +104,7 @@ function showSidebar(ip) {
 
 function closeSidebar() {
     const element = document.querySelector(`[ip="${currentSidebar}"]`)
-    element.removeAttribute("active")
+    if (element) element.removeAttribute("active")
     currentSidebar = null
     sidebar.style.display = "none"
 }
@@ -112,7 +113,10 @@ sidebarClose.addEventListener("click", closeSidebar)
 
 window.addEventListener("click", function(e) {
     const target = e.target.closest("[ip]")
-    if (target) showSidebar(target.getAttribute("ip"))
+    if (target) {
+        if (target.getAttribute("ip") != currentSidebar) showSidebar(target.getAttribute("ip"))
+        else closeSidebar()
+    }
 })
 
 

@@ -1,7 +1,7 @@
 {
 	"version": {
 		"environment": "beta",
-		"id": "v1.2.0"
+		"id": "v1.2.1"
 	}, "environments": {
 		"stable": {
 			"base_url": "https://links.titilapierre.fr/",
