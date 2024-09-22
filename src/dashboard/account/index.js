@@ -27,24 +27,24 @@ async function updatePassword() {
     ]
     for (let pass of passes) {
         if (!pass.regex.test(newPasswordInput.value)) {
-            openSnackbar({ "text": "Erreur : " + pass.error, "icon": "fa-solid fa-circle-exclamation", "bgColor": "error" })
+            showPopupMessage({ "text": "Erreur : " + pass.error, "icon": "fa-solid fa-circle-exclamation", "bgColor": "error" })
             return
         }
     }
     if (newPasswordInput.value != confirmPasswordInput.value) {
-        openSnackbar({ "text": "Erreur : Le champ de confirmation ne contient pas le bon mot de passe.", "icon": "fa-solid fa-circle-exclamation", "bgColor": "error" })
+        showPopupMessage({ "text": "Erreur : Le mot de passe du champ de confirmation ne correspond pas à celui défini précédemment.", "icon": "fa-solid fa-circle-exclamation", "bgColor": "error" })
         return
     }
     const response = await api_call(url("/api/password/"), { method: "UPDATE",
         body: { oldPassword: oldPasswordInput.value, newPassword: newPasswordInput.value },
     })
     if (response.success) {
-        openSnackbar({"text": "Votre mot de passe a été mis à jour avec succès !", "icon": "fa-solid fa-check", "bgColor": "success"})
         closePopup()
+        openSnackbar({"text": "Votre mot de passe a été mis à jour avec succès !", "icon": "fa-solid fa-check", "bgColor": "success"})
     } else if (response.code == "INVALID_CREDENTIALS") {
-        openSnackbar({"text": "Erreur : Votre mot de passe actuel est incorrect.", "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
+        showPopupMessage({"text": "Erreur : Votre mot de passe actuel est incorrect.", "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
     } else {
-        openSnackbar({"text": "Erreur : "+response.code, "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
+        showPopupMessage({"text": "Erreur : "+response.code, "icon": "fa-solid fa-circle-exclamation", "bgColor": "error"})
     }
 }
 
