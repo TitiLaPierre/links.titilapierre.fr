@@ -9,6 +9,16 @@ const nextButton = document.querySelector("#calendar--next")
 const nowButton = document.querySelector("#calendar--now")
 const backButton = document.querySelector("#calendar--backToMonth")
 
+let currentSidebar = null
+const sidebar = document.querySelector(".sidebar")
+const sidebarClose = sidebar.querySelector(".sidebar--close")
+const sidebarTitle = sidebar.querySelector(".sidebar--title")
+const sidebarDescription = sidebar.querySelector(".sidebar--description")
+const sidebarTag = sidebar.querySelector(".sidebar--tag")
+const sidebarActivities = sidebar.querySelector(".sidebar--activities")
+
+let viewsPerIps = {}
+
 async function updateViews(newYear, newMonth, newDay) {
     if (newYear <= 0 && newMonth < 1) return
 
@@ -29,7 +39,7 @@ async function updateViews(newYear, newMonth, newDay) {
 
     if (response.success) {
         history.pushState({ year, month }, "", `/stats/${link.uid}/${year.toString().padStart(4, "0")}/${month.toString().padStart(2, "0")}/${day.toString().padStart(2, "0")}/`)
-        const viewsPerIps = {}
+        viewsPerIps = {}
         response.data.forEach(({ creation_date, ip }) => {
             if (!viewsPerIps[ip]) viewsPerIps[ip] = []
             viewsPerIps[ip].push(creation_date)
@@ -43,6 +53,7 @@ async function updateViews(newYear, newMonth, newDay) {
             contentGrid.innerHTML = ""
             for (const [ip, views] of Object.entries(viewsPerIps)) {
                 const rowElement = document.createElement("button")
+                rowElement.setAttribute("ip", ip)
                 rowElement.classList.add("grid--row")
                 rowElement.innerHTML = `<span class="grid--title">
                             <i class="fa-solid fa-globe"></i>
@@ -50,9 +61,8 @@ async function updateViews(newYear, newMonth, newDay) {
                         </span>
                         <span class="grid--info">${views.length}</span>
                         <span class="grid--info">${new Date(views[views.length-1]*1000).toLocaleTimeString()}</span>
-                        <span class="grid--action"><i class="fa-solid fa-chevron-right"></i></span>
                     </button>`
-    
+        
                 contentGrid.appendChild(rowElement)
             }
         } else {
@@ -67,6 +77,44 @@ async function updateViews(newYear, newMonth, newDay) {
     nextButton.disabled = null
     previousButton.disabled = null
 }
+
+function showSidebar(ip) {
+    if (currentSidebar == ip) return
+    if (currentSidebar) closeSidebar()
+    currentSidebar = ip
+    const element = document.querySelector(`[ip="${ip}"]`)
+    element.setAttribute("active", true)
+    sidebar.style.display = null
+    sidebarTitle.textContent = ip
+    sidebarDescription.textContent = "Position inconnue"
+    sidebarTag.href = `https://www.ip-tracker.org/lookup.php?ip=${ip}`
+    sidebarActivities.innerHTML = ""
+    for (const view of viewsPerIps[ip]) {
+        const activityElement = document.createElement("div")
+        activityElement.classList.add("sidebar--activity")
+        activityElement.innerHTML = `<i class="sidebar--activity--icon fa-solid fa-check"></i>
+            <p class="sidebar--activity--description">
+                L'utilisateur a utilisé le lien.
+            </p>
+            <span class="sidebar--activity--date">${new Date(view*1000).toLocaleTimeString()}</span>`
+        sidebarActivities.appendChild(activityElement)
+    }
+}
+
+function closeSidebar() {
+    const element = document.querySelector(`[ip="${currentSidebar}"]`)
+    element.removeAttribute("active")
+    currentSidebar = null
+    sidebar.style.display = "none"
+}
+
+sidebarClose.addEventListener("click", closeSidebar)
+
+window.addEventListener("click", function(e) {
+    const target = e.target.closest("[ip]")
+    if (target) showSidebar(target.getAttribute("ip"))
+})
+
 
 nextButton.addEventListener("click", () => updateViews(year, month, day+1))
 previousButton.addEventListener("click", () => updateViews(year, month, day-1))

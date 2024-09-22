@@ -1,13 +1,14 @@
 @use "~global/scss/bundle" as *;
 
+.splitView {
+    @include flex(row, $gap: 16px);
+}
 .grid {
     width: 100%;
     max-width: 650px;
 }
 .grid--content {
-    @include flex(column, 1px);
-    background: var(--lightGray);
-    padding: 1px;
+    @include flex(column, $gap: 5px);
     --radius: 5px;
     border-radius: var(--radius);
     > :first-child {
@@ -32,7 +33,7 @@
     color: var(--gray);
 }
 .grid--row {
-    padding: 8px 16px;
+    padding: 12px 16px;
     border: none;
     background: var(--white);
     position: relative;
@@ -40,19 +41,19 @@
     > * {
         @include flex(row, 10px, $align: center);
     }
+    &:hover { background: var(--light); }
     &::before {
-        @include absolute($bottom: 0, $left: 50%);
+        @include absolute($left: 0, $top: 50%);
         @include radius("round");
-        translate: -50% 50%;
         content: "";
-        width: 0;
-        height: 3px;
+        translate: -50% -50%;
+        width: 4px;
+        height: 24px;
         background: var(--main);
-        transition-duration: .3s;
+        opacity: 0;
+        transition: .3s;
     }
-    &:hover::before {
-        width: 80%;
-    }
+    &[active]::before { opacity: 1; }
 }
 .grid--title {
     font-size: 14px;
@@ -70,12 +71,104 @@
     color: var(--darkGray);
     font-size: 12px;
 }
-.grid--action {
-    @include absolute($top: 50%, $right: 15px);
+.sidebar {
+    @include radius("medium");
+    max-width: 250px;
+    width: 100%;
+    background: var(--white);
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    height: fit-content;
+}
+.sidebar--close {
+    @include flex(row, $gap: 10px, $align: center);
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    color: var(--darkGray);
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+    i { color: inherit; }
+    &:hover { background: var(--light); }
+}
+.sidebar--separator {
+    border: none;
+    border-bottom: 2px solid var(--background);
+}
+.sidebar--part {
+    @include flex(column, $gap: 10px);
+    padding: 10px 15px;
+}
+.sidebar--title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.sidebar--description {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--darkGray);
+}
+.sidebar--tag {
+    @include flex(row, $gap: 5px, $align: center);
     @include radius("small");
-    justify-content: center;
-    translate: 0 -50%;
+    padding: 5px 10px;
+    background: var(--light);
+    width: fit-content;
+    font-size: 14px;
+    cursor: pointer;
+    &:hover { background: var(--lightGray); }
+}
+.sidebar--subtitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--darkGray);
+    text-transform: uppercase;
+}
+.sidebar--activities {
+    @include flex(column);
+    & > *:not(:last-child) {
+        border-left: 2px solid var(--light);
+    }
+}
+.sidebar--activity {
+    padding: 5px 0;
+    padding-left: 25px;
+    margin-left: 10px;
+    position: relative;
+}
+.sidebar--activity--icon {
+    @include absolute($left: 0, $top: 0);
+    @include flex(row, $align: center, $justify: center);
+    @include radius("round");
+    translate: calc(-50% - 1px) 0;
+    background: var(--success);
     width: 24px;
     height: 24px;
-    background: var(--main);
+    font-size: 10px;
+    position: absolute;
+}
+.sidebar--activity--description {
+    font-size: 14px;
+}
+.sidebar--activity--date {
+    font-size: 12px;
+    color: var(--gray);
+}
+.sidebar--presentation {
+    @include flex(column, $gap: 5px);
+    @include radius("small");
+    padding: 10px 15px;
+    background: var(--light);
+}
+.sidebar--presentation--title {
+    @include flex(row, $gap: 5px, $align: center);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.sidebar--presentation--description {
+    font-size: 12px;
 }
