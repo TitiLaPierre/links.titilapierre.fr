@@ -25,6 +25,9 @@ $endpoints = [
     ],
     "retreive_icon" => [
         [ "method" => "POST", "params" => ["uid"], "file" => "src/api/endpoints/icon.php", "action" => "endpoint_retreive_icon" ]
+    ],
+    "password" => [
+        [ "method" => "UPDATE", "params" => [], "file" => "src/api/endpoints/password.php", "action" => "endpoint_change_password" ]
     ]
 ];
 

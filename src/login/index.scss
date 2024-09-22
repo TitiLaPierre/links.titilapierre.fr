@@ -28,6 +28,23 @@
 .login--part {
     @include flex(column, 10px);
 }
+#login--passwordInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#login--passwordInputContainer>input { 
+    flex-grow: 1;
+}
+.popup--inputButton {
+    @include flex(row, $align: center, $justify: center);
+    @include radius("medium");
+    border: none;
+    background: var(--white);
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
 .login--title {
     font-size: 24px;
     font-weight: 700;
@@ -40,15 +57,15 @@
 }
 .login--information {
     @include flex(row, 10px, $justify: space-between, $align: center);
-    @include radius("small");
+    @include radius("medium");
     width: fit-content;
-    padding: 2px 15px;
+    padding: 10px;
     font-size: 14px;
     font-weight: 600;
     user-select: none;
 }
-.information__error { background: var(--error); }
-.information__success { background: var(--success); }
+.information__error { background: var(--error); color: var(--onError); }
+.information__success { background: var(--success); color: var(--onSuccess); }
 .login--field {
     width: fit-content;
     font-size: 14px;
@@ -58,17 +75,16 @@
     user-select: none;
 }
 .login--input {
-    @include radius("medium");
-    @include shadow("small");
-    background: var(--light);
-    padding: 10px 15px;
+    @include radius("small");
+    border-style: solid;
+    border-color: var(--light);
+    border-width: 2px;
+    padding: 10px;
     font-size: 14px;
-    font-weight: 500;
-    outline: 2px solid transparent;
-    border: none;
+    outline: none;
 }
 .login--input:focus {
-    outline: 2px solid var(--main);
+    border-color: var(--main);
 }
 .login--button {
     @include radius("medium");
@@ -85,11 +101,11 @@
 }
 .login--button::after {
     @include absolute($top: 0, $left: 0, $bottom: 0);
+    @include radius("medium");
     display: block;
     background: var(--black);
     width: 0;
     z-index: -1;
-    border-radius: 5px;
     transition: 0.3s;
     content: "";
 }

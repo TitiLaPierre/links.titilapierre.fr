@@ -16,18 +16,46 @@ function openPopup(data) {
     }
 
     popup.innerHTML = `
-        
         <div class="popup--header">
             <h2>${data.title}</h2>
             <button class="popup--close" onclick="closePopup()"><i class="fa-solid fa-times"></i></button>
         </div>
         <div class="popup--content">
-            ${data.paragraphs.map(paragraph => `<p class="popup--paragraph">${paragraph}</p>`).join("")}
+            ${data.content.map(element => {
+                if (element.type == "paragraph") {
+                    return `<div class="popup--section">
+                        ${element.title ? `<h3 class="popup--title">${element.title}</h3>` : ""}
+                        <p class="popup--paragraph">${element.text}</p>
+                    </div>`
+                } else if (element.type == "list") {
+                    return `<div class="popup--section">
+                        ${element.title ? `<p class="popup--item">${element.title}</p>` : ""}
+                        <ul class="popup--list">
+                            ${element.items.map(item => `<li class="popup--item">${item}</li>`).join("")}
+                        </ul>
+                    </div>`
+                } else if (element.type == "input") {
+                    return `<div class="popup--inputContainer">
+                        <input
+                            id="${element.id}"
+                            class="popup--input"
+                            placeholder="${element.placeholder}"
+                            type="${element.inputType}"
+                            ${element.input ? `oninput="${element.input}"` : ""}
+                        >
+                        ${element.inputType == "password" ? `<button class="popup--inputButton" onclick="showHidePassword(this, '${element.id}')"><i class="fa-solid fa-eye"></i></button>` : ""}
+                    </div>`
+                }
+            }).join("")}
         </div>
         <div class="popup--actions">
             ${data.actions.map(action => {
-                return `<button class="popup--button button__${action.appearance}" onclick="${action.execute}">
-                    <i class="${action.icon}"></i>
+                let buttonIcon = ""
+                if (action.icon != "") {
+                    buttonIcon = `<i class="${action.icon}"></i>`
+                }
+                return `<button class="popup--button button__${action.appearance}" onclick="${action.execute}" ${action.disabled ? "disabled" : ""} ${action.id ? `id="${action.id}"` : ""}>
+                    ${buttonIcon}
                     ${action.text}
                 </button>`
             }).join("")}
@@ -37,10 +65,53 @@ function openPopup(data) {
     scrim.style.display = "block"
 }
 
+function showPopupMessage(data) {
+    let popup = document.querySelector("#popup")
+    if (popup) {
+        let popupMessage = document.querySelector("#popup--message")
+        if (!popupMessage) {
+            popupMessage = document.createElement("div")
+            popupMessage.id = "popup--message"
+        }
+        popupMessage.style.backgroundColor = `var(--${data.bgColor})`
+        let popupMessageIcon = ""
+        if (data.icon != "") {
+            popupMessageIcon = `<i style="color: var(--on${data.bgColor.charAt(0).toUpperCase() + data.bgColor.slice(1)})" class="${data.icon}"></i>`
+        }
+        popupMessage.innerHTML = `
+        ${popupMessageIcon}
+        <span style="color: var(--on${data.bgColor.charAt(0).toUpperCase() + data.bgColor.slice(1)})">${data.text}</span>
+        `
+        popup.insertBefore(popupMessage, popup.childNodes[2])
+    }
+}
+
 function closePopup() {
     window.removeEventListener("click", handleClick)
     const popup = document.getElementById("popup")
     popup.style.display = "none"
     const scrim = document.getElementById("scrim")
     scrim.style.display = "none"
+}
+
+function openSnackbar(data) {
+    let snackbar = document.createElement("div")
+    snackbar.className = "snackbar"
+    snackbar.style.backgroundColor = `var(--${data.bgColor})`
+    document.body.appendChild(snackbar)
+    let snackbarIcon = ""
+    if (data.icon != "") {
+        snackbarIcon = `<i style="color: var(--on${data.bgColor.charAt(0).toUpperCase() + data.bgColor.slice(1)})" class="${data.icon}"></i>`
+    }
+    snackbar.innerHTML = `
+    ${snackbarIcon}
+    <span style="color: var(--on${data.bgColor.charAt(0).toUpperCase() + data.bgColor.slice(1)})">${data.text}</span>
+    `
+    snackbar.style.transform = "translate(0px, 0px)"
+    setTimeout(() => {
+        snackbar.style.transform = "translate(0px, 200px)"
+        setTimeout(() => {
+            snackbar.remove()
+        }, "2000")
+    }, "4000")
 }

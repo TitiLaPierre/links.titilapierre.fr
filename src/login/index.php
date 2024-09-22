@@ -28,7 +28,10 @@ function render() { ?>
                 </div>
                 <div class="login--part">
                     <label class="login--field" for="password">Mot de passe</label>
-                    <input class="login--input" type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+                    <div id="login--passwordInputContainer">
+                        <input class="login--input" type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+                        <button class="popup--inputButton" onclick="showHidePassword()"><i class="fa-solid fa-eye"></i></button>
+                    </div>
                 </div>
                 <div class="login--part">
                     <button class="login--button" id="login">Se connecter</button>

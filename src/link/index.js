@@ -16,12 +16,12 @@ deleteButton.addEventListener("click", async function(e) {
     e.stopPropagation()
     openPopup({
         title: "Supprimer le lien",
-        paragraphs: [
-            `En continuant, vous allez supprimer le lien "${link.name}" comprenant les statistiques et la liaison de redirection entre les deux sites.`,
-            "Cette opération est irréversible.",
+        content: [
+            { type: "paragraph", text: `En continuant, vous allez supprimer le lien "${link.name}" comprenant les statistiques et la liaison de redirection entre les deux sites.` },
+            { type: "paragraph", text: "Cette opération est irréversible." }
         ],
         actions: [
-            { text: "Annuler", icon: "fa-solid fa-arrow-left", appearance: "secondary", execute: "closePopup()" },
+            { text: "Annuler", icon: "", appearance: "secondary", execute: "closePopup()" },
             { text: "Supprimer", icon: "fa-solid fa-trash", appearance: "danger", execute: `deleteLink('${link.uid}')` },
         ]
     })

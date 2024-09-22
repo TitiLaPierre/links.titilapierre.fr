@@ -11,9 +11,10 @@
     background: white;
     z-index: 1000;
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     overflow: hidden;
-    > * { padding: 15px 25px; }
+    max-height: 90vh;
+    > * { padding: 25px 35px; }
     .popup--close {
         @include flex(row, $align: center, $justify: center);
         @include radius("medium");
@@ -29,10 +30,31 @@
     }
     .popup--content {
         @include flex(column, 25px);
-        padding-block: 25px;
+        overflow-y: auto;
     }
     .popup--paragraph {
+        font-size: 14px;
+        color: var(--darkGray);
+    }
+    .popup--title {
         font-size: 16px;
+        font-weight: 600;
+        color: var(--black);
+        position: relative;
+    }
+    .popup--title::before {
+        @include absolute($top: 0px, $left: -10px);
+        @include radius("small");
+        content: "";
+        translate: -100% 0;
+        background: var(--main);
+        width: 4px;
+        height: 100%;
+
+    }
+    .popup--list { margin-left: 20px; }
+    .popup--item {
+        font-size: 12px;
         color: var(--darkGray);
     }
     .popup--actions {
@@ -49,7 +71,40 @@
         i { color: inherit; }
         &.button__main { background: var(--black); color: var(--white); }
         &.button__secondary { background: var(--light); }
-        &.button__danger { background: var(--error); color: var(--on-error) }
+        &.button__danger { background: var(--error); color: var(--onError) }
+        &:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; background-color: var(--lightGray); }
+    }
+    .popup--inputContainer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .popup--input {
+        @include radius("small");
+        border-style: solid;
+        border-color: var(--light);
+        border-width: 2px;
+        padding: 10px;
+        font-size: 14px;
+        outline: none;
+        flex-grow: 1;
+    }
+    .popup--input:focus {
+        border-color: var(--main);
+    }
+    .popup--inputButton {
+        @include flex(row, $align: center, $justify: center);
+        @include radius("medium");
+        border: none;
+        background: var(--white);
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+    #popup--message {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 }
 
@@ -61,4 +116,21 @@
     width: 100vw;
     height: 100vh;
     z-index: 999;
+    transition-duration: 0s;
+}
+
+.snackbar {
+    @include radius("medium");
+    @include shadow("normal");
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    translate: -50% 0%;
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translate(0px, 200px);
+    width: max-content;
 }

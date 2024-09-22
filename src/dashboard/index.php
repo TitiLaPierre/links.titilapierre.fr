@@ -26,6 +26,14 @@ if (!is_logged()) {
         "action" => "render_dashboard_campaigns",
         "navbar" => "campaigns"
     ], require_once("src/dashboard/campaigns/index.php"));
+} else if (count(ARGUMENTS) == 1 && ARGUMENTS[0] == "account") {
+    return combine_settings([
+        "title" => "Compte",
+        "css" => ["css/dashboard.css", "css/page.css", "css/dashboard/index.css", "css/popup.css"],
+        "js" => ["js/dashboard.js", "js/dashboard/account/index.js", "js/password.js", "js/popup.js"],
+        "action" => "render_dashboard_account",
+        "navbar" => "account"
+    ], require_once("src/dashboard/account/index.php"));
 } else {
     redirect("/dashboard/");
 }
