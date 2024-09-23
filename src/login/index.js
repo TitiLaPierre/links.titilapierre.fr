@@ -33,18 +33,6 @@ function validateInputs() {
     buttonLogin.disabled = enabled ? null : true
 }
 
-function showHidePassword() {
-    let pwdInput = document.querySelector("#login--passwordInputContainer>input")
-    let showHideBtn = document.querySelector("#login--passwordInputContainer>button>i")
-    if (pwdInput.getAttribute("type") == "password") {
-        pwdInput.setAttribute("type", "text")
-        showHideBtn.className = "fa-solid fa-eye-slash"
-    } else {
-        pwdInput.setAttribute("type", "password")
-        showHideBtn.className = "fa-solid fa-eye"
-    }
-}
-
 inputUsername.addEventListener("input", validateInputs)
 inputPassword.addEventListener("input", validateInputs)
 

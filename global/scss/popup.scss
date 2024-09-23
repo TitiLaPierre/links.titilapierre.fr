@@ -74,11 +74,7 @@
         &.button__danger { background: var(--error); color: var(--onError) }
         &:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; background-color: var(--lightGray); }
     }
-    .popup--inputContainer {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+    .popup--inputContainer { position: relative; }
     .popup--input {
         @include radius("small");
         border-style: solid;
@@ -88,17 +84,17 @@
         font-size: 14px;
         outline: none;
         flex-grow: 1;
+        width: 100%;
     }
     .popup--input:focus {
         border-color: var(--main);
     }
     .popup--inputButton {
-        @include flex(row, $align: center, $justify: center);
-        @include radius("medium");
+        @include absolute($right: 0px, $top: -5px);
+        @include flex(row, $gap: 5px, $align: center);
+        translate: 0 -100%;
         border: none;
-        background: var(--white);
-        width: 32px;
-        height: 32px;
+        background: none;
         cursor: pointer;
     }
     #popup--message {

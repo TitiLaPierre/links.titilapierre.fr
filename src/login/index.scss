@@ -27,22 +27,13 @@
 }
 .login--part {
     @include flex(column, 10px);
+    position: relative;
 }
-#login--passwordInputContainer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-#login--passwordInputContainer>input { 
-    flex-grow: 1;
-}
-.popup--inputButton {
-    @include flex(row, $align: center, $justify: center);
-    @include radius("medium");
+.login--password--show {
+    @include absolute($right: 0px, $top: 2px);
+    @include flex(row, $gap: 5px, $align: center);
     border: none;
-    background: var(--white);
-    width: 32px;
-    height: 32px;
+    background: none;
     cursor: pointer;
 }
 .login--title {
@@ -82,6 +73,7 @@
     padding: 10px;
     font-size: 14px;
     outline: none;
+    width: 100%;
 }
 .login--input:focus {
     border-color: var(--main);

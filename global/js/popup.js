@@ -43,7 +43,12 @@ function openPopup(data) {
                             type="${element.inputType}"
                             ${element.input ? `oninput="${element.input}"` : ""}
                         >
-                        ${element.inputType == "password" ? `<button class="popup--inputButton" onclick="showHidePassword(this, '${element.id}')"><i class="fa-solid fa-eye"></i></button>` : ""}
+                        ${element.inputType == "password" ?
+                            `<button class="popup--inputButton" onclick="showHidePassword(this, '${element.id}')">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Afficher</span>
+                            </button>`
+                        : ""}
                     </div>`
                 }
             }).join("")}

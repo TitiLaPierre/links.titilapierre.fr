@@ -9,7 +9,7 @@ if (is_logged()) {
 return [
     "title" => "Connexion au Tableau de bord",
     "css" => ["css/login/index.css"],
-    "js" => ["js/login/index.js"]
+    "js" => ["js/login/index.js", "js/password.js"]
 ];
 
 function render() { ?>
@@ -28,10 +28,11 @@ function render() { ?>
                 </div>
                 <div class="login--part">
                     <label class="login--field" for="password">Mot de passe</label>
-                    <div id="login--passwordInputContainer">
-                        <input class="login--input" type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
-                        <button class="popup--inputButton" onclick="showHidePassword()"><i class="fa-solid fa-eye"></i></button>
-                    </div>
+                    <input class="login--input" type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
+                    <button class="login--password--show" onclick="showHidePassword(this, 'password')">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Afficher</span>
+                    </button>
                 </div>
                 <div class="login--part">
                     <button class="login--button" id="login">Se connecter</button>
