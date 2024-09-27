@@ -42,20 +42,20 @@
     position: relative;
     user-select: none;
     &:hover { background: var(--mainLight); }
-}
-.link__selected {
-    background: var(--light);
-    &::before {
-        @include absolute($top: 50%, $left: 0);
-        @include radius("round");
-        content: "";
-        translate: -50% -50%;
-        width: 4px;
-        height: 24px;
-        background: var(--darkGray);
-        transition-duration: .3s;
+    .link__selected {
+        background: var(--light);
+        &::before {
+            @include absolute($top: 50%, $left: 0);
+            @include radius("round");
+            content: "";
+            translate: -50% -50%;
+            width: 4px;
+            height: 24px;
+            background: var(--darkGray);
+            transition-duration: .3s;
+        }
+        &:hover::before { background: var(--main); }
     }
-    &:hover::before { background: var(--main); }
 }
 .navbar--minimize {
     @include absolute($top: 5px, $right: 0);
@@ -79,4 +79,62 @@
     align-items: center;
     .minimizable { display: none; justify-content: center; }
     .navbar--link, .navbar--profile { padding: 12px; justify-content: center; }
+}
+
+.mobileNavbar {
+    display: none;
+    width: 100%;
+    background: var(--white);
+    position: relative;
+}
+.mobileNavbar--header {
+    @include flex(row, 15px, $justify: space-between, $align: center);
+    padding: 20px;    
+}
+.mobileNavbar--logo {
+    width: 28px;
+    height: 28px;
+    user-select: none;
+    pointer-events: none;
+}
+.mobileNavbar--button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+.mobileNavbar--menu {
+    @include absolute($top: 100%);
+    @include shadow("large");
+    @include flex(column, 15px);
+    padding: 20px;
+    background: var(--light);
+    z-index: 50;
+    width: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.mobileNavbar--title {
+    text-align: center;
+    font-size: 16px;
+}
+.mobileNavbar--separator {
+    border: none;
+    width: 100%;
+    height: 1px;
+    background: var(--lightGray);
+}
+.mobileNavbar--link {
+    @include radius("medium");
+    position: relative;
+    background: var(--white);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 20px;
+}
+
+@media screen and (max-width: 750px) {
+    .navbar, .navbar--minimize { display: none; }
+    .mobileNavbar { display: block; }
 }

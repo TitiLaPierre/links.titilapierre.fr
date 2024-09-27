@@ -8,7 +8,10 @@ body { overflow: hidden; }
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+@media screen and (min-width: 751px) {
 .minimized + .page { @include absolute($top: 0, $left: 74px, $right: 0, $bottom: 0); }
+}
 .page--infos {
     max-width: 500px;
     width: 100%;

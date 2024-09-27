@@ -11,6 +11,24 @@ $minimized = $navbar_state && $navbar_state === "minimized" ? "minimized" : "";
     })
 </script>
 <button class="navbar--minimize <?= $minimized ?>" id="minimize" style="display: none;"><i class="fa-solid fa-chevron-left"></i></button>
+<nav class="mobileNavbar">
+    <div class="mobileNavbar--header">
+        <button class="mobileNavbar--button" id="mobileNavbar--button"><i class="fa-solid fa-bars"></i></button>
+        <img src="assets/favicon.png" alt="Logo" class="mobileNavbar--logo">
+        <a href="dashboard/account/" class="mobileNavbar--button <?= $link_selection["account"] ?>">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+    </div>
+    <div class="mobileNavbar--menu" style="display: none;" id="mobileNavbar--menu">
+        <h2 class="mobileNavbar--title">Tableau de bord</h2>
+        <hr class="mobileNavbar--separator">
+        <a href="dashboard/" class="mobileNavbar--link <?= $link_selection["home"] ?>">Accueil</a>
+        <a href="dashboard/links/" class="mobileNavbar--link <?= $link_selection["links"] ?>">Liens</a>
+        <a href="dashboard/campaigns/" class="mobileNavbar--link <?= $link_selection["campaigns"] ?>">Campagnes</a>
+        <hr class="mobileNavbar--separator">
+        <a href="account/" class="mobileNavbar--link <?= $link_selection["account"] ?>">Mon compte</a>
+    </div>
+</nav>
 <nav class="navbar <?= $minimized ?>">
     <div class="navbar--header navbar--aligned">
         <img src="assets/favicon.png" alt="Logo" class="navbar--logo">
