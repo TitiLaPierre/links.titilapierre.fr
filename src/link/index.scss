@@ -1,11 +1,15 @@
 @use "~global/scss/bundle" as *;
 
 .dual {
-    @include flex(row, 25px, $justify: space-between);
+    @include flex(row, $justify: space-between);
+    gap: 75px 25px;
     flex-wrap: wrap;
     > * { flex: 1; }
 }
-.dual--item { @include flex(column, 50px) }
+.dual--item {
+    @include flex(column, 50px);
+    min-width: min(300px, 100%);
+}
 .dual--title { @include flex(row, 15px, $align: center); }
 .dual--button {
     @include flex(row, 10px, $align: center, $justify: center);

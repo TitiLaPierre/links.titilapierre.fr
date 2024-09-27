@@ -10,7 +10,7 @@ body { overflow: hidden; }
 }
 
 @media screen and (min-width: 751px) {
-.minimized + .page { @include absolute($top: 0, $left: 74px, $right: 0, $bottom: 0); }
+    .minimized + .page { @include absolute($top: 0, $left: 74px, $right: 0, $bottom: 0); }
 }
 .page--infos {
     max-width: 500px;
@@ -88,6 +88,7 @@ img.page--icon { object-fit: cover; }
 .page--actions {
     @include flex(row, 20px, $align: stretch);
     margin-bottom: 35px;
+    overflow-x: auto;
 }
 .page--action {
     @include flex(row, 15px, $align: center);
@@ -172,4 +173,27 @@ a.page--warning[href]:hover { scale: 1.05; }
     background: var(--main);
     width: fit-content;
     border: none;
+}
+
+@media screen and (max-width: 750px) {
+    body { overflow: auto; }
+    .page {
+        left: 0 !important;
+        padding: 30px 20px 50px 20px;
+        position: relative;
+    }
+    .page--icon, .page--icon--wrapper {
+        width: 48px;
+        height: 48px;
+    }
+    .page--icon--action {
+        i { font-size: 20px; }
+    }
+    .page--title {
+        font-size: 28px;
+    }
+    .page--subtitle {
+        margin-left: 15px;
+        font-size: 20px;
+    }
 }

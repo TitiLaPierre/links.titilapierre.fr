@@ -47,3 +47,14 @@
     opacity: var(--opacity);
     z-index: -1;
 }
+
+@media screen and (max-width: 750px) {
+    .calendar--content {
+        gap: 5px;
+    }
+    .calendar--day {
+        i {
+            @include absolute($top: 0, $right: 0);
+        }
+    }
+}

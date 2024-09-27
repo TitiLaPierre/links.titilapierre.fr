@@ -1,7 +1,7 @@
 @use "~global/scss/bundle" as *;
 
 .presentation--list {
-    @include grid($columns: repeat(auto-fill, minmax(300px, 1fr)));
+    @include grid($columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)));
     width: 100%;
     gap: 30px;
 }
@@ -54,7 +54,7 @@
 }
 
 .linkPreview--list {
-    @include grid($columns: repeat(auto-fill, minmax(500px, 1fr)));
+    @include grid($columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr)));
     gap: 35px;
 }
 .linkPreview {
