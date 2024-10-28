@@ -2,6 +2,7 @@
 
 .splitView {
     @include flex(row, $gap: 16px);
+    position: relative;
 }
 .grid {
     width: 100%;
@@ -172,4 +173,15 @@
 }
 .sidebar--presentation--description {
     font-size: 12px;
+}
+
+@media screen and (max-width: 1200px) {
+    .sidebar {
+        @include absolute($top: 0, $left: 0, $right: 0);
+        max-width: 100%;
+    }
+    .splitView {
+        width: fit-content;
+        min-height: 400px;
+    }
 }

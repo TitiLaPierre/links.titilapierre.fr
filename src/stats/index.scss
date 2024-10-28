@@ -23,10 +23,6 @@
     background: var(--light);
     cursor: pointer;
     &:hover { background: var(--lightGray); }
-    &#calendar--now {
-        @include absolute($top: 50%, $left: calc(100% + 20px));
-        translate: 0 -50%;
-    }
 }
 .statsHeader--date {
     @include flex(row, 2px, $align: center, $justify: center);
@@ -79,7 +75,7 @@
     &:hover { background: var(--lightGray); }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
     .statsHeader {
         @include flex(column, 20px, $align: center);
         padding: 10px;
