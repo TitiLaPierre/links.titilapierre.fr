@@ -51,6 +51,6 @@ mobileMenuButton.addEventListener("click", function(e) {
     toggleMobileMenu()
 })
 window.addEventListener("click", function(e) {
-    if (isMobileMenuOpen && e.target != mobileMenuButton && e.target != mobileMenu)
+    if (isMobileMenuOpen && e.target != mobileMenuButton && !mobileMenu.contains(e.target))
         toggleMobileMenu()
 })

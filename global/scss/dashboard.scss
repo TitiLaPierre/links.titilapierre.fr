@@ -125,6 +125,7 @@
     background: var(--lightGray);
 }
 .mobileNavbar--link {
+    @include flex(row, 15px, $align: center);
     @include radius("medium");
     position: relative;
     background: var(--white);

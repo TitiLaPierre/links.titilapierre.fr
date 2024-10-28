@@ -22,11 +22,23 @@ $minimized = $navbar_state && $navbar_state === "minimized" ? "minimized" : "";
     <div class="mobileNavbar--menu" style="display: none;" id="mobileNavbar--menu">
         <h2 class="mobileNavbar--title">Tableau de bord</h2>
         <hr class="mobileNavbar--separator">
-        <a href="dashboard/" class="mobileNavbar--link <?= $link_selection["home"] ?>">Accueil</a>
-        <a href="dashboard/links/" class="mobileNavbar--link <?= $link_selection["links"] ?>">Liens</a>
-        <a href="dashboard/campaigns/" class="mobileNavbar--link <?= $link_selection["campaigns"] ?>">Campagnes</a>
+        <a href="dashboard/" class="mobileNavbar--link <?= $link_selection["home"] ?>">
+            <i class="fa-solid fa-house"></i>
+            Accueil
+        </a>
+        <a href="dashboard/links/" class="mobileNavbar--link <?= $link_selection["links"] ?>">
+            <i class="fa-solid fa-link"></i>
+            Liens
+        </a>
+        <a href="dashboard/campaigns/" class="mobileNavbar--link <?= $link_selection["campaigns"] ?>">
+            <i class="fa-solid fa-layer-group"></i>
+            Campagnes
+        </a>
         <hr class="mobileNavbar--separator">
-        <a href="account/" class="mobileNavbar--link <?= $link_selection["account"] ?>">Mon compte</a>
+        <a href="dashboard/account/" class="mobileNavbar--link <?= $link_selection["account"] ?>">
+            <i class="fa-solid fa-circle-user"></i>
+            Mon compte
+        </a>
     </div>
 </nav>
 <nav class="navbar <?= $minimized ?>">
