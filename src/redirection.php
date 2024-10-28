@@ -17,7 +17,10 @@ function render($settings) { ?>
         <i class="error--icon fa-solid fa-exclamation-triangle"></i>
         <h1 class="error--title">Lien innexistant</h1>
         <p class="error--description">
-            Le lien que vous avez suivi n'<b>existe pas</b> ou a été <b>supprimé</b>. Il est possible que vous l'ayez <b>mal recopié</b>. Dans le cas échéant, vous pouvez demander à l'auteur du lien de vous <b>en renvoyer un nouveau</b>.
+            Le lien que vous avez suivi n'<b>existe pas</b> ou a été <b>supprimé</b>. Il est possible que vous l'ayez <b>mal recopié</b>.
+        </p>
+        <p class="error--description">
+            Dans le cas échéant, vous pouvez demander à l'auteur du lien de vous <b>en renvoyer un nouveau</b>.
         </p>
         <a href="javascript:history.back()" class="error--button">
             <i class="fa-solid fa-arrow-left"></i>

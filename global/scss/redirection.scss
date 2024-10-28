@@ -23,6 +23,7 @@ body {
     font-size: 24px;
     font-weight: 800;
     text-transform: uppercase;
+    text-align: center;
     margin-top: 35px;
 }
 .error--description {
@@ -46,4 +47,16 @@ body {
     font-size: 12px;
     font-weight: 500;
     user-select: none;
+}
+
+@media screen and (max-width: 650px) {
+    .error {
+        border-radius: 0;
+        width: 100%;
+        flex: 1;
+        padding-inline: 20px;
+    }
+    .error--title {
+        margin-bottom: 35px;
+    }
 }

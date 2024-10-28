@@ -34,7 +34,16 @@ class DayCase extends Case {
 
         const dayCountElement = document.createElement("span")
         dayCountElement.setAttribute("class", "calendar--day")
-        dayCountElement.innerText = `${days[dayOfWeek].slice(0, 3)}. ${day.toString().padStart(2, "0")}`
+
+        const dayOfWeekElement = document.createElement("span")
+        dayOfWeekElement.setAttribute("class", "calendar--day--label")
+        dayOfWeekElement.innerText = `${days[dayOfWeek].substring(0, 3)}.`
+        dayCountElement.appendChild(dayOfWeekElement)
+
+        const dayOfMonthElement = document.createElement("span")
+        dayOfMonthElement.setAttribute("class", "calendar--day--value")
+        dayOfMonthElement.innerText = day.toString().padStart(2, "0")
+        dayCountElement.appendChild(dayOfMonthElement)
 
         const isToday = new Date().getDate() == day && new Date().getMonth() == month-1 && new Date().getFullYear() == year
         if (isToday) {

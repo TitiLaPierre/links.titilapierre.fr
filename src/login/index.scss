@@ -48,7 +48,7 @@
 }
 .login--information {
     @include flex(row, 10px, $justify: space-between, $align: center);
-    @include radius("medium");
+    @include radius("small");
     width: fit-content;
     padding: 10px;
     font-size: 14px;
@@ -131,4 +131,8 @@
         
     }
     .login--container { padding: 50px 35px; }
+    .login--information {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
 }

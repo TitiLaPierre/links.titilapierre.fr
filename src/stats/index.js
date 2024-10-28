@@ -63,6 +63,12 @@ window.addEventListener("keydown", function(e) {
     }
 })
 
+window.addEventListener("resize", () => {
+    resizeElement(monthElement)
+    resizeElement(yearElement)
+    if (dayElement) resizeElement(dayElement)
+})
+
 window.addEventListener("pageshow", () => {
     let dateElementWidth = 0
     dateElement.querySelectorAll("input").forEach(inputElement => dateElementWidth += maximumElementSize(inputElement))

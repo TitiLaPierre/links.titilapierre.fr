@@ -48,6 +48,7 @@ if (!is_logged()) {
         return combine_settings([
             "title" => "Statistiques — ".$link["name"],
             "css" => ["css/dashboard.css", "css/page.css", "css/stats/index.css"],
+            "js" => ["js/dashboard.js"],
             "year" => $year,
             "month" => $month,
             "day" => $day,
