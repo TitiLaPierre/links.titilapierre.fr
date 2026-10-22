@@ -1,6 +1,6 @@
 {
 	"version": {
-		"environment": "beta",
+		"environment": "stable",
 		"id": "v1.3.0"
 	}, "environments": {
 		"stable": {
